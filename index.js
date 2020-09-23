@@ -4,6 +4,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const path = require('path');
 
 // Initialization
 const app = express();
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 
 // ROUTES
 app.get('/', function(req, res){
-    res.send("Hi I am a chatbot");
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 // Facebook
@@ -66,5 +67,5 @@ function sendText(sender, text) {
 }
 
 app.listen(app.get('port'), function(){
-    console.log("running: port");
+    console.log("Running on Port: " + app.get('port'));
 })
