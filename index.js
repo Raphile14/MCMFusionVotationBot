@@ -17,9 +17,12 @@ let token = process.env.PAGE_ACCESS_TOKEN;
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Client Use
+app.use(express.static(__dirname + '/client'));
+
 // ROUTES
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
 // Facebook
