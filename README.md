@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.1 (09/23/2020)
+- Button Modification
+
 indev 0.2.0 (09/23/2020)
 - Button Test
 

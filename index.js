@@ -83,12 +83,22 @@ function sendButton(sender, text) {
                     type: "template",
                     payload: {
                         template_type: "button",
-                        text: "What do you want to do next?",
+                        text: "Hi there, Malayan! What do you want to do?",
                         buttons: [
                             {
+                                type: "postback",
+                                title: "Information",
+                                payload: "information_query"
+                            },
+                            {
                                 type: "web_url",
-                                url: "https://www.messenger.com",
-                                title: "Visit Messenger"
+                                url: "https://mcmfusionvotationbot.herokuapp.com/",
+                                title: "Check Votation Results"
+                            },
+                            {
+                                type: "postback",
+                                title: "Vote!",
+                                payload: "vote_query"
                             }
                         ]
                     }
