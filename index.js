@@ -42,7 +42,8 @@ app.post('/webhook/', function(req, res){
         let sender = event.sender.id;
         if (event.message && event.message.text) {
             let text = event.message.text;
-            sendText(sender, "Text Echo: " + text.substring(0, 100));
+            // sendText(sender, "Text Echo: " + text.substring(0, 100));
+            sendButton(sender, "Text Echo: " + text.substring(0, 100));
         }
     }
     res.sendStatus(200);
@@ -58,6 +59,41 @@ function sendText(sender, text) {
         json: {
             recipient: {id: sender},
             message: messageData
+        }
+    }, function (error, response, body) {
+        if (error) {
+            console.log("sending error");
+        }
+        else if (response.body.error) {
+            console.log("response body error");
+        }
+    });
+}
+
+function sendButton(sender, text) {
+    let messageData = {text: "sender: " + sender + " | text: " + text};
+    request({
+        url: "https://graph.facebook.com/v2.6/me/messages",
+        qs: {access_token : token},
+        method: "POST",
+        json: {
+            recipient: {id: sender},
+            message: {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "button",
+                        text: "What do you want to do next?",
+                        buttons: [
+                            {
+                                type: "web_url",
+                                url: "https://www.messenger.com",
+                                title: "Visit Messenger"
+                            }
+                        ]
+                    }
+                }
+            }
         }
     }, function (error, response, body) {
         if (error) {

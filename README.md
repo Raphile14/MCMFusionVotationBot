@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.0 (09/23/2020)
+- Button Test
+
 indev 0.1.9 (09/23/2020)
 - Drafting of Results Page
 
