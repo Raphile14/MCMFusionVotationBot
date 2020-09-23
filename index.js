@@ -1,12 +1,16 @@
 'use strict'
 
+// Requirements
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 
+// Initialization
 const app = express();
-
 app.set('port', (process.env.PORT || 5000));
+
+// Variables
+let token = process.env.PAGE_ACCESS_TOKEN;
 
 // Allows the process of data
 app.use(bodyParser.urlencoded({extended: false}));
@@ -17,19 +21,15 @@ app.get('/', function(req, res){
     res.send("Hi I am a chatbot");
 });
 
-let token = process.env.PAGE_ACCESS_TOKEN;
-console.log(token);
-
 // Facebook
 app.get('/webhook/', function(req, res){
     if (req.query['hub.verify_token'] === "april142000") {
-        console.log("step 1");
         res.send(req.query['hub.challenge']);
     }
-    console.log("step 1: fail");
     res.send("Wrong token");
 });
 
+// When a message is received
 app.post('/webhook/', function(req, res){
     console.log("received something");
     let messaging_events = req.body.entry[0].messaging;
@@ -44,8 +44,9 @@ app.post('/webhook/', function(req, res){
     res.sendStatus(200);
 });
 
+// Functions
 function sendText(sender, text) {
-    let messageData = {text: text};
+    let messageData = {text: "sender: " + sender + " | text: " + text};
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: {access_token : token},
