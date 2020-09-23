@@ -18,6 +18,7 @@ app.get('/', function(req, res){
 });
 
 let token = process.env.PAGE_ACCESS_TOKEN;
+console.log(token);
 
 // Facebook
 app.get('/webhook/', function(req, res){
