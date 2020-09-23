@@ -6,6 +6,7 @@ h3 {
     text-indent: 100px;
 }
 
-#staycationSHS {
+#staycationSHS, #staycationCollege, #show_stopperSHS, #show_stopperCollege,
+#flicks_and_chillSHS, #flicks_and_chillCollege, #vattle_of_the_vandsSHS, #vattle_of_the_vandsCollege {
     text-indent: 150px;
 }

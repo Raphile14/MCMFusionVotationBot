@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.1.9 (09/23/2020)
+- Drafting of Results Page
+
 indev 0.1.8 (09/23/2020)
 - Bug fixes
 
