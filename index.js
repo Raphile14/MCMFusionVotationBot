@@ -23,8 +23,10 @@ console.log(token);
 // Facebook
 app.get('/webhook/', function(req, res){
     if (req.query['hub.verify_token'] === "april142000") {
+        console.log("step 1");
         res.send(req.query['hub.challenge']);
     }
+    console.log("step 1: fail");
     res.send("Wrong token");
 });
 
