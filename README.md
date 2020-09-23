@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.1.8 (09/23/2020)
+- Bug fixes
+
 indev 0.1.7 (09/23/2020)
 - File restructure
 - Bug fixes
