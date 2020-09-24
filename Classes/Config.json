@@ -1,7 +1,7 @@
 {    
     "vote" : {
         "title": "#MCMFusionTechnicity Vote! Choose a Category",
-        "b1_tittle": "MCMFlicks and Chill",
+        "b1_title": "MCMFlicks and Chill",
         "b1_payload": "vote_flicks_and_chill",
 
         "b2_title": "Show Stopper",
@@ -12,7 +12,7 @@
     },
     "fac" : {
         "title": "#MCMFlicksAndChill Vote! Choose a Department",
-        "b1_tittle": "SHS Department",
+        "b1_title": "SHS Department",
         "b1_payload": "facSHS",
 
         "b2_title": "College Department",
@@ -23,7 +23,7 @@
     },
     "ss" : {
         "title": "#MCMShowStopper Vote! Choose a Department",
-        "b1_tittle": "SHS Department",
+        "b1_title": "SHS Department",
         "b1_payload": "ssSHS",
 
         "b2_title": "College Department",
