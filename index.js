@@ -48,17 +48,17 @@ app.post('/webhook/', function(req, res){
             console.log("Payload: " + payload);
 
             // If User is asking for Information
-            if (payload === "\'information_query\'") {
+            if (payload === "information_query") {
                 sendText(sender, "Information");
             }
 
             // If User wants to vote
-            else if (payload === "\'vote_query\'") {
+            else if (payload === "vote_query") {
                 sendButton(sender, "Vote");
             }
 
             // Back to Main Menu
-            else if (payload === "\'vote_back_main_menu\'") {
+            else if (payload === "vote_back_main_menu") {
                 sendButton(sender, "Any");
             }
         }
@@ -66,8 +66,7 @@ app.post('/webhook/', function(req, res){
         // Check for Normal Message
         else if (event.message && event.message.text) {
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
-            console.log("FROM HOOK: " + sender);
-            console.log("Is Postback: " + event.postback);            
+            console.log("FROM HOOK: " + sender);           
             
             // Send the Query Buttons
             sendButton(sender, "Any");       
