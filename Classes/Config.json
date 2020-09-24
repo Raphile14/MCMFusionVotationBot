@@ -34,101 +34,200 @@
     },
     "facSHS": {
         "title": " Vote 'team name' from the STEM Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from STEM!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facSHSVoteSTEM",
 
-        "b2_title": "Next",
+        "b2_title": "Next Team",
         "b2_payload": "facSHSABM",
 
         "b3_title": "Back to Selection!",
-        "b3_payload": "vote_flicks_and_chill"
+        "b3_payload": "fac"
     },
     "facSHSABM": {
         "title": " Vote 'team name' from the ABM Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from ABM!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facSHSVoteABM",
 
-        "b2_title": "Next",
+        "b2_title": "Next Team",
         "b2_payload": "facSHSHUMSS",
 
-        "b3_title": "Back",
+        "b3_title": "Previous Team",
         "b3_payload": "facSHS"
     },
     "facSHSHUMSS": {
         "title": " Vote 'team name' from the HUMSS Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from HUMSS!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facSHSVoteHUMSS",
 
-        "b2_title": "Next",
+        "b2_title": "Next Team",
         "b2_payload": "facSHSGAS",
 
-        "b3_title": "Back",
+        "b3_title": "Previous Team",
         "b3_payload": "facSHSABM"
     },
     "facSHSGAS": {
         "title": " Vote 'team name' from the GAS Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from GAS!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facSHSVoteGAS",
 
-        "b2_title": "Next",
+        "b2_title": "Next Team",
         "b2_payload": "facSHSICT",
 
-        "b3_title": "Back",
+        "b3_title": "Previous Team",
         "b3_payload": "facSHSHUMSS"
     },
     "facSHSICT": {
         "title": " Vote 'team name' from the ICT Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from ICT!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facSHSVoteICT",
 
-        "b2_title": "Back",
+        "b2_title": "Previous Team",
         "b2_payload": "facSHSGAS",
 
         "b3_title": "Back to Selection!",
-        "b3_payload": "vote_flicks_and_chill"
+        "b3_payload": "fac"
     },
     "facCollege": {
         "title": " Vote 'team name' from the ALFONSO T. YUCHENGCO COLLEGE OF BUSINESS Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from ATYCB!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facCVoteATYCB",
 
-        "b2_title": "Next",
+        "b2_title": "Next Team",
         "b2_payload": "facCCAS",
 
         "b3_title": "Back to Selection!",
-        "b3_payload": "vote_flicks_and_chill"
+        "b3_payload": "fac"
     },
     "facCCAS": {
         "title": " Vote 'team name' from the COLLEGE OF ARTS AND SCIENCE Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from CAS!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facCVoteCAS",
 
-        "b2_title": "Next",
+        "b2_title": "Next Team",
         "b2_payload": "facCCIS",
 
-        "b3_title": "Back",
+        "b3_title": "Previous Team",
         "b3_payload": "facCollege"
     },
     "facCCIS": {
         "title": " Vote 'team name' from the COLLEGE OF COMPUTER AND INFORMATION SCIENCE Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from CCIS!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facCVoteCCIS",
 
-        "b2_title": "Next",
+        "b2_title": "Next Team",
         "b2_payload": "facCEA",
 
-        "b3_title": "Back",
+        "b3_title": "Previous Team",
         "b3_payload": "facCCAS"
     },
     "facCEA": {
         "title": " Vote 'team name' from the COLLEGE OF ENGINEERING AND ARCHITECTURE Department! #MCMFlicksAndChill",
-        "b1_title": "Vote 'team name' from CEA!",
+        "b1_title": "Vote 'team name'",
         "b1_payload": "facCVoteCEA",
 
-        "b2_title": "Back",
+        "b2_title": "Previous Team",
         "b2_payload": "facCCIS",
 
         "b3_title": "Back to Selection!",
-        "b3_payload": "vote_flicks_and_chill"
+        "b3_payload": "fac"
+    },
+    "ssSHS": {
+        "title": " Vote 'team name' from the STEM Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssSHSVoteSTEM",
+
+        "b2_title": "Next Team",
+        "b2_payload": "ssSHSABM",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "ss"
+    },
+    "ssSHSABM": {
+        "title": " Vote 'team name' from the ABM Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssSHSVoteABM",
+
+        "b2_title": "Next Team",
+        "b2_payload": "ssSHSHUMSS",
+
+        "b3_title": "Previous Team",
+        "b3_payload": "ssSHS"
+    },
+    "ssSHSHUMSS": {
+        "title": " Vote 'team name' from the HUMSS Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssSHSVoteHUMSS",
+
+        "b2_title": "Next Team",
+        "b2_payload": "ssSHSGAS",
+
+        "b3_title": "Previous Team",
+        "b3_payload": "ssSHSABM"
+    },
+    "ssSHSGAS": {
+        "title": " Vote 'team name' from the GAS Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssSHSVoteGAS",
+
+        "b2_title": "Next Team",
+        "b2_payload": "ssSHSICT",
+
+        "b3_title": "Previous Team",
+        "b3_payload": "ssSHSHUMSS"
+    },
+    "ssSHSICT": {
+        "title": " Vote 'team name' from the ICT Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssSHSVoteICT",
+
+        "b2_title": "Previous Team",
+        "b2_payload": "ssSHSGAS",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "ss"
+    },
+    "ssCollege": {
+        "title": " Vote 'team name' from the ALFONSO T. YUCHENGCO COLLEGE OF BUSINESS Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssCVoteATYCB",
+
+        "b2_title": "Next Team",
+        "b2_payload": "ssCCAS",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "ss"
+    },
+    "ssCCAS": {
+        "title": " Vote 'team name' from the COLLEGE OF ARTS AND SCIENCE Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssCVoteCAS",
+
+        "b2_title": "Next Team",
+        "b2_payload": "ssCCIS",
+
+        "b3_title": "Previous Team",
+        "b3_payload": "ssCollege"
+    },
+    "ssCCIS": {
+        "title": " Vote 'team name' from the COLLEGE OF COMPUTER AND INFORMATION SCIENCE Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssCVoteCCIS",
+
+        "b2_title": "Next Team",
+        "b2_payload": "ssCEA",
+
+        "b3_title": "Previous Team",
+        "b3_payload": "ssCCAS"
+    },
+    "ssCEA": {
+        "title": " Vote 'team name' from the COLLEGE OF ENGINEERING AND ARCHITECTURE Department! #MCMShowStopper",
+        "b1_title": "Vote 'team name'",
+        "b1_payload": "ssCVoteCEA",
+
+        "b2_title": "Previous Team",
+        "b2_payload": "ssCCIS",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "ss"
     }
 }

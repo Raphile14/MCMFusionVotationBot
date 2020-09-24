@@ -1,8 +1,13 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.7 (09/24/2020)
+- Modified Query Messages
+- Added More Buttons for Show Stopper Category
+
 indev 0.2.6 (09/24/2020)
-- Added More Buttons for MCMFlicks And Chill
+- Code Restructure
+- Added More Buttons for MCMFlicks And Chill Category
 
 indev 0.2.5-l (09/24/2020)
 - Bug fixes
