@@ -184,7 +184,7 @@ function sendButton(sender, query) {
         });
     }
 
-    console.log("FROM SEND:" + text);
+    console.log("FROM SEND");
     
 }
 
