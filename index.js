@@ -18,10 +18,15 @@ let token = process.env.PAGE_ACCESS_TOKEN || "test";
 // Cached Storage
 let Voters = [];
 let cacheConfigJSON = [];
+let cacheVotingPayloads = [];
 
 // Read to storage Config JSON
 for (var key in Config) {
     cacheConfigJSON[key] = Config[key];
+    if (cacheConfigJSON[key].b1_payload.includes("facSHSVote") || cacheConfigJSON[key].b1_payload.includes("facCVote")
+    || cacheConfigJSON[key].b1_payload.includes("ssCVote") || cacheConfigJSON[key].b1_payload.includes("ssSHSVote")) {
+        cacheVotingPayloads.push(cacheConfigJSON[key].b1_payload);
+    }
 }
 
 // Allows the process of data

@@ -18,7 +18,7 @@
         "b2_title": "College Department",
         "b2_payload": "facCollege",
 
-        "b3_title": "Back to Selection!",
+        "b3_title": "Back to Categories!",
         "b3_payload": "vote"
     },
     "ss" : {
@@ -29,7 +29,7 @@
         "b2_title": "College Department",
         "b2_payload": "ssCollege",
 
-        "b3_title": "Back to Category Selection!",
+        "b3_title": "Back to Categories!",
         "b3_payload": "vote"
     },
     "facSHS": {
