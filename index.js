@@ -45,21 +45,27 @@ app.post('/webhook/', function(req, res){
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
             console.log("FROM HOOK: " + text);
 
-            // If User is asking for Information
-            if (text === "Information") {
-                sendText(sender, "Information");
-            }
+            // Check if Payload
+            if (event.postback) {
+                let payload = JSON.stringify(event.postback.payload);
+                console.log("Payload: " + payload);
 
-            // If User wants to vote
-            else if (text === "Vote Candidates!") {
-                sendButton(sender, "Vote");
-            }
+                // If User is asking for Information
+                if (payload === "\"information_query\"") {
+                    sendText(sender, "Information");
+                }
 
-            // Back to Main Menu
-            else if (text === "Back to Main Menu!") {
-                sendButton(sender, "Any");
-            }
+                // If User wants to vote
+                else if (payload === "\"vote_query\"") {
+                    sendButton(sender, "Vote");
+                }
 
+                // Back to Main Menu
+                else if (payload === "\"vote_back_main_menu\"") {
+                    sendButton(sender, "Any");
+                }
+            }
+            
             // Send the Query Buttons
             else {
                 sendButton(sender, "Any");
