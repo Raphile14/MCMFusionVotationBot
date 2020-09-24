@@ -51,7 +51,6 @@ app.post('/webhook/', function(req, res){
             // If User is asking for Information
             if (payload == "\"information_query\"") {
                 sendText(sender, "Information");
-                sendButton(sender, "Any");
             }
 
             // If User wants to vote
