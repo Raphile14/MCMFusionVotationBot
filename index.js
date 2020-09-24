@@ -43,6 +43,7 @@ app.post('/webhook/', function(req, res){
         if (event.message && event.message.text) {
             let text = event.message.text;
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
+            console.log("FROM HOOK: " + text);
             sendButton(sender, "Text Echo: " + text.substring(0, 100));
         }
     }
@@ -72,7 +73,7 @@ function sendText(sender, text) {
 
 function sendButton(sender, text) {
     let messageData = {text: "sender: " + sender + " | text: " + text};
-    console.log(text);
+    console.log("FROM SEND:" + text);
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: {access_token : token},
@@ -88,17 +89,17 @@ function sendButton(sender, text) {
                         buttons: [
                             {
                                 type: "postback",
-                                title: "Information",
+                                title: "FAQ",
                                 payload: "information_query"
                             },
                             {
                                 type: "web_url",
                                 url: "https://mcmfusionvotationbot.herokuapp.com/",
-                                title: "Check Votation Results"
+                                title: "Check Votation Results!"
                             },
                             {
                                 type: "postback",
-                                title: "Vote!",
+                                title: "Vote Candidates!",
                                 payload: "vote_query"
                             }
                         ]
