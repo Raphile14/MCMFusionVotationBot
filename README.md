@@ -1,6 +1,11 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.5 (09/24/2020)
+- Classes for Voters
+- Code Restructure
+- Added main buttons for MCMFlicks and Chill and Show Stopper
+
 indev 0.2.4 (09/24/2020)
 - Bug fixes
 
