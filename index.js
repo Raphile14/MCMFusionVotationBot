@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const path = require('path');
 const Voter = require('./Classes/Voter.js');
-const Config = require('./Classes/Config.js');
+const Config = require('./Classes/Config.json');
 
 // Initialization
 const app = express();

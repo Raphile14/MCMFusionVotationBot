@@ -1,6 +1,10 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.5-a (09/24/2020)
+- Config Restructure
+- Bug fixes
+
 indev 0.2.5 (09/24/2020)
 - Classes for Voters
 - Code Restructure
