@@ -101,24 +101,20 @@ app.post('/webhook/', function(req, res){
                     b2_payload = Config.ss.b2_payload;
                     b3_title = Config.ss.b3_title;
                     b3_payload = Config.ss.b3_payload;
+                }                
+                let data = {
+                    b_title: b_title,
+                    b1_title: b1_title,
+                    b1_payload: b1_payload,
+                    
+                    b2_title: b2_title,
+                    b2_payload: b2_payload,
+
+                    b3_title: b3_title,
+                    b3_payload: b3_payload
                 }
-                
-                // Other Commands
-                else {
-                    let data = {
-                        b_title: b_title,
-                        b1_title: b1_title,
-                        b1_payload: b1_payload,
-                        
-                        b2_title: b2_title,
-                        b2_payload: b2_payload,
-    
-                        b3_title: b3_title,
-                        b3_payload: b3_payload
-                    }
-                    console.log(b_title, data);
-                    sendButton(sender, data); 
-                }                           
+                console.log(b_title, data);
+                sendButton(sender, data);                            
             }            
         }
 
