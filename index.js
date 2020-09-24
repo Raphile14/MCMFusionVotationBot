@@ -40,9 +40,9 @@ app.get('/webhook/', function(req, res){
 
 // When a message is received
 app.post('/webhook/', function(req, res){
-    console.log("received something");
+    // console.log("received something");
     let messaging_events = req.body.entry[0].messaging;
-    console.log(messaging_events);
+    // console.log(messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
         let event = messaging_events[i];
         let sender = event.sender.id;
@@ -64,8 +64,49 @@ app.post('/webhook/', function(req, res){
                 return;
             }
 
-            // Other Commands
-            sendButton(sender, payload);            
+            else {
+                // Other Commands
+                // Button Variables
+                let b_title;
+                let b1_title, b1_payload;
+                let b2_title, b2_payload;
+                let b3_title, b3_payload;
+
+                // Vote Query
+                if (query == "\"vote_query\"") {
+                    b_title = Config.vote.title;
+                    b1_title = Config.vote.b1_tittle;
+                    b1_payload = Config.vote.b1_payload;
+                    b2_title = Config.vote.b2_tittle;
+                    b2_payload = Config.vote.b2_payload;
+                    b3_title = Config.vote.b3_tittle;
+                    b3_payload = Config.vote.b3_payload;
+                }
+
+                // Flicks and Chill
+                else if (query == "\"vote_flicks_and_chill\"") {
+                    b_title = Config.fac.title;
+                    b1_title = Config.fac.b1_tittle;
+                    b1_payload = Config.fac.b1_payload;
+                    b2_title = Config.fac.b2_tittle;
+                    b2_payload = Config.fac.b2_payload;
+                    b3_title = Config.fac.b3_tittle;
+                    b3_payload = Config.fac.b3_payload;
+                }
+
+                // Show Stopper
+                else if (query == "\"vote_show_stopper\"") {
+                    b_title = Config.ss.title;
+                    b1_title = Config.ss.b1_tittle;
+                    b1_payload = Config.ss.b1_payload;
+                    b2_title = Config.ss.b2_tittle;
+                    b2_payload = Config.ss.b2_payload;
+                    b3_title = Config.ss.b3_tittle;
+                    b3_payload = Config.ss.b3_payload;
+                }
+                console.log(b_title, b1_title, b2_title, b3_title);
+                sendButton(sender, payload);            
+            }            
         }
 
         // Check for Normal Message
@@ -107,45 +148,7 @@ function sendText(sender, text) {
 }
 
 // For Specialized Buttons
-function sendButton(sender, query) {
-    // Vote Variables
-    let b_title;
-    let b1_title, b1_payload;
-    let b2_title, b2_payload;
-    let b3_title, b3_payload;
-
-    // Vote Query
-    if (query == "\"vote_query\"") {
-        b_title = Config.vote.title;
-        b1_title = Config.vote.b1_tittle;
-        b1_payload = Config.vote.b1_payload;
-        b2_title = Config.vote.b2_tittle;
-        b2_payload = Config.vote.b2_payload;
-        b3_title = Config.vote.b3_tittle;
-        b3_payload = Config.vote.b3_payload;
-    }
-
-    // Flicks and Chill
-    else if (query == "\"vote_flicks_and_chill\"") {
-        b_title = Config.fac.title;
-        b1_title = Config.fac.b1_tittle;
-        b1_payload = Config.fac.b1_payload;
-        b2_title = Config.fac.b2_tittle;
-        b2_payload = Config.fac.b2_payload;
-        b3_title = Config.fac.b3_tittle;
-        b3_payload = Config.fac.b3_payload;
-    }
-
-    // Show Stopper
-    else if (query == "\"vote_show_stopper\"") {
-        b_title = Config.ss.title;
-        b1_title = Config.ss.b1_tittle;
-        b1_payload = Config.ss.b1_payload;
-        b2_title = Config.ss.b2_tittle;
-        b2_payload = Config.ss.b2_payload;
-        b3_title = Config.ss.b3_tittle;
-        b3_payload = Config.ss.b3_payload;
-    }
+function sendButton(sender, query) {        
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: {access_token : token},
