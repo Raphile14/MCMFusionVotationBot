@@ -13,10 +13,16 @@ const app = express();
 app.set('port', (process.env.PORT || 5000));
 
 // Variables
-let token = process.env.PAGE_ACCESS_TOKEN;
+let token = process.env.PAGE_ACCESS_TOKEN || "test";
 
 // Cached Storage
 let Voters = [];
+let cacheConfigJSON = [];
+
+// Read to storage Config JSON
+for (var key in Config) {
+    cacheConfigJSON[key] = Config[key];
+}
 
 // Allows the process of data
 app.use(bodyParser.urlencoded({extended: false}));
@@ -65,43 +71,15 @@ app.post('/webhook/', function(req, res){
             else {
                 // Other Commands
                 // Button Variables
-                let b_title;
-                let b1_title, b1_payload;
-                let b2_title, b2_payload;
-                let b3_title, b3_payload;
+                let query = payload.replace(/['"]+/g, '');
+                let b_title = cacheConfigJSON[query].title;
+                let b1_title = cacheConfigJSON[query].b1_title;                
+                let b1_payload = cacheConfigJSON[query].b1_payload;
+                let b2_title = cacheConfigJSON[query].b2_title;
+                let b2_payload = cacheConfigJSON[query].b2_payload;
+                let b3_title = cacheConfigJSON[query].b3_title;
+                let b3_payload = cacheConfigJSON[query].b3_payload;
 
-                // Vote Query
-                if (payload == "\"vote_query\"") {
-                    b_title = Config.vote.title;
-                    b1_title = Config.vote.b1_title;
-                    b1_payload = Config.vote.b1_payload;
-                    b2_title = Config.vote.b2_title;
-                    b2_payload = Config.vote.b2_payload;
-                    b3_title = Config.vote.b3_title;
-                    b3_payload = Config.vote.b3_payload;
-                }
-
-                // Flicks and Chill
-                else if (payload == "\"vote_flicks_and_chill\"") {
-                    b_title = Config.fac.title;
-                    b1_title = Config.fac.b1_title;
-                    b1_payload = Config.fac.b1_payload;
-                    b2_title = Config.fac.b2_title;
-                    b2_payload = Config.fac.b2_payload;
-                    b3_title = Config.fac.b3_title;
-                    b3_payload = Config.fac.b3_payload;
-                }
-
-                // Show Stopper
-                else if (payload == "\"vote_show_stopper\"") {
-                    b_title = Config.ss.title;
-                    b1_title = Config.ss.b1_title;
-                    b1_payload = Config.ss.b1_payload;
-                    b2_title = Config.ss.b2_title;
-                    b2_payload = Config.ss.b2_payload;
-                    b3_title = Config.ss.b3_title;
-                    b3_payload = Config.ss.b3_payload;
-                }                
                 let data = {
                     b_title: b_title,
                     b1_title: b1_title,
@@ -230,7 +208,7 @@ function sendQueryButton(sender) {
                             {
                                 type: "postback",
                                 title: "Vote Candidates!",
-                                payload: "vote_query"
+                                payload: "vote"
                             }
                         ]
                     }

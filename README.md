@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.6 (09/24/2020)
+- Added More Buttons for MCMFlicks And Chill
+
 indev 0.2.5-l (09/24/2020)
 - Bug fixes
 

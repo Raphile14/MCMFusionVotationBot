@@ -2,10 +2,10 @@
     "vote" : {
         "title": "#MCMFusionTechnicity Vote! Choose a Category",
         "b1_title": "MCMFlicks and Chill",
-        "b1_payload": "vote_flicks_and_chill",
+        "b1_payload": "fac",
 
         "b2_title": "Show Stopper",
-        "b2_payload": "vote_show_stopper",
+        "b2_payload": "ss",
 
         "b3_title": "Back to Main Menu!",
         "b3_payload": "vote_back_main_menu"
@@ -18,8 +18,8 @@
         "b2_title": "College Department",
         "b2_payload": "facCollege",
 
-        "b3_title": "Back to Category Selection!",
-        "b3_payload": "vote_query"
+        "b3_title": "Back to Selection!",
+        "b3_payload": "vote"
     },
     "ss" : {
         "title": "#MCMShowStopper Vote! Choose a Department",
@@ -30,6 +30,105 @@
         "b2_payload": "ssCollege",
 
         "b3_title": "Back to Category Selection!",
-        "b3_payload": "vote_query"
+        "b3_payload": "vote"
+    },
+    "facSHS": {
+        "title": " Vote 'team name' from the STEM Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from STEM!",
+        "b1_payload": "facSHSVoteSTEM",
+
+        "b2_title": "Next",
+        "b2_payload": "facSHSABM",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "vote_flicks_and_chill"
+    },
+    "facSHSABM": {
+        "title": " Vote 'team name' from the ABM Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from ABM!",
+        "b1_payload": "facSHSVoteABM",
+
+        "b2_title": "Next",
+        "b2_payload": "facSHSHUMSS",
+
+        "b3_title": "Back",
+        "b3_payload": "facSHS"
+    },
+    "facSHSHUMSS": {
+        "title": " Vote 'team name' from the HUMSS Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from HUMSS!",
+        "b1_payload": "facSHSVoteHUMSS",
+
+        "b2_title": "Next",
+        "b2_payload": "facSHSGAS",
+
+        "b3_title": "Back",
+        "b3_payload": "facSHSABM"
+    },
+    "facSHSGAS": {
+        "title": " Vote 'team name' from the GAS Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from GAS!",
+        "b1_payload": "facSHSVoteGAS",
+
+        "b2_title": "Next",
+        "b2_payload": "facSHSICT",
+
+        "b3_title": "Back",
+        "b3_payload": "facSHSHUMSS"
+    },
+    "facSHSICT": {
+        "title": " Vote 'team name' from the ICT Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from ICT!",
+        "b1_payload": "facSHSVoteICT",
+
+        "b2_title": "Back",
+        "b2_payload": "facSHSGAS",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "vote_flicks_and_chill"
+    },
+    "facCollege": {
+        "title": " Vote 'team name' from the ALFONSO T. YUCHENGCO COLLEGE OF BUSINESS Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from ATYCB!",
+        "b1_payload": "facCVoteATYCB",
+
+        "b2_title": "Next",
+        "b2_payload": "facCCAS",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "vote_flicks_and_chill"
+    },
+    "facCCAS": {
+        "title": " Vote 'team name' from the COLLEGE OF ARTS AND SCIENCE Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from CAS!",
+        "b1_payload": "facCVoteCAS",
+
+        "b2_title": "Next",
+        "b2_payload": "facCCIS",
+
+        "b3_title": "Back",
+        "b3_payload": "facCollege"
+    },
+    "facCCIS": {
+        "title": " Vote 'team name' from the COLLEGE OF COMPUTER AND INFORMATION SCIENCE Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from CCIS!",
+        "b1_payload": "facCVoteCCIS",
+
+        "b2_title": "Next",
+        "b2_payload": "facCEA",
+
+        "b3_title": "Back",
+        "b3_payload": "facCCAS"
+    },
+    "facCEA": {
+        "title": " Vote 'team name' from the COLLEGE OF ENGINEERING AND ARCHITECTURE Department! #MCMFlicksAndChill",
+        "b1_title": "Vote 'team name' from CEA!",
+        "b1_payload": "facCVoteCEA",
+
+        "b2_title": "Back",
+        "b2_payload": "facCCIS",
+
+        "b3_title": "Back to Selection!",
+        "b3_payload": "vote_flicks_and_chill"
     }
 }
