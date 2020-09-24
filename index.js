@@ -37,6 +37,7 @@ app.get('/webhook/', function(req, res){
 app.post('/webhook/', function(req, res){
     console.log("received something");
     let messaging_events = req.body.entry[0].messaging;
+    console.log(messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
         let event = messaging_events[i];
         let sender = event.sender.id;
@@ -45,6 +46,7 @@ app.post('/webhook/', function(req, res){
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
             console.log("FROM HOOK: " + text);
             console.log("Is Postback: " + event.postback);
+
             // Check if Payload
             if (event.postback) {
                 let payload = JSON.stringify(event.postback.payload);
