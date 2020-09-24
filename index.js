@@ -51,7 +51,6 @@ app.post('/webhook/', function(req, res){
         if (event.postback) {
             let payload = JSON.stringify(event.postback.payload);
             console.log("Payload: " + payload);
-            console.log(payload == "information_query");
 
             // If User is asking for Information
             if (payload == "\"information_query\"") {
@@ -116,7 +115,7 @@ function sendButton(sender, query) {
     let b3_title, b3_payload;
 
     // Vote Query
-    if (query === "\"vote_query\"") {
+    if (query == "\"vote_query\"") {
         b_title = Config.vote.title;
         b1_title = Config.vote.b1_tittle;
         b1_payload = Config.vote.b1_payload;
@@ -127,7 +126,7 @@ function sendButton(sender, query) {
     }
 
     // Flicks and Chill
-    else if (query === "\"vote_flicks_and_chill\"") {
+    else if (query == "\"vote_flicks_and_chill\"") {
         b_title = Config.fac.title;
         b1_title = Config.fac.b1_tittle;
         b1_payload = Config.fac.b1_payload;
@@ -138,7 +137,7 @@ function sendButton(sender, query) {
     }
 
     // Show Stopper
-    else if (query === "\"vote_show_stopper\"") {
+    else if (query == "\"vote_show_stopper\"") {
         b_title = Config.ss.title;
         b1_title = Config.ss.b1_tittle;
         b1_payload = Config.ss.b1_payload;
