@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.3 (09/24/2020)
+- Query Restructure
+
 indev 0.2.2-k (09/24/2020)
 - Bug fixes
 

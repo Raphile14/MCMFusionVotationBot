@@ -51,6 +51,7 @@ app.post('/webhook/', function(req, res){
             // If User is asking for Information
             if (payload == "\"information_query\"") {
                 sendText(sender, "Information");
+                sendButton(sender, "Any");
             }
 
             // If User wants to vote
@@ -66,7 +67,6 @@ app.post('/webhook/', function(req, res){
 
         // Check for Normal Message
         else if (event.message && event.message.text) {
-            // sendText(sender, "Text Echo: " + text.substring(0, 100));
             console.log("FROM HOOK: " + sender);           
             
             // Send the Query Buttons
@@ -80,9 +80,9 @@ app.post('/webhook/', function(req, res){
 function sendText(sender, text) {
     let messageData;
     if (text === "Information") {
-        messageData = {text: "Frequently Asked Questions:\n" +
+        messageData = {text: "Frequently Asked Questions:\n\n" +
     "1.) This Bot is used to assist in the voting process of the #MCMFusionTechnicity\n" +
-    "2.) Voters can only vote once. Make it count! You can't change your vote!" + 
+    "2.) Voters can only vote once. Make it count! You can't change your vote!\n" + 
     "3.) Live voting count can be found here: https://mcmfusionvotationbot.herokuapp.com/"};
     }   
     request({
@@ -159,7 +159,7 @@ function sendButton(sender, query) {
                         type: "template",
                         payload: {
                             template_type: "button",
-                            text: "#MCMFusionTechnicity Vote! Choose Category",
+                            text: "#MCMFusionTechnicity Vote! Choose a Category",
                             buttons: [
                                 {
                                     type: "postback",
