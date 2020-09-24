@@ -184,7 +184,8 @@ function sendButton(sender, query) {
             console.log("sending error");
         }
         else if (response.body.error) {
-            console.log("response body error");
+            console.log(response.body.error);
+            // console.log("response body error");
         }
     });
 }
