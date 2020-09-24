@@ -44,7 +44,7 @@ app.post('/webhook/', function(req, res){
             let text = event.message.text;
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
             console.log("FROM HOOK: " + text);
-
+            console.log("Is Postback: " + event.postback);
             // Check if Payload
             if (event.postback) {
                 let payload = JSON.stringify(event.postback.payload);
