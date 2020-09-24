@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.8-a (09/24/2020)
+- Code improvements
+
 indev 0.2.8 (09/24/2020)
 - Code improvements
 

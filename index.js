@@ -51,9 +51,7 @@ app.get('/webhook/', function(req, res){
 
 // When a message is received
 app.post('/webhook/', function(req, res){
-    // console.log("received something");
     let messaging_events = req.body.entry[0].messaging;
-    // console.log(messaging_events);
     for (let i = 0; i < messaging_events.length; i++){
         let event = messaging_events[i];
         let sender = event.sender.id;
@@ -61,7 +59,6 @@ app.post('/webhook/', function(req, res){
         // Check if Payload
         if (event.postback) {
             let payload = JSON.stringify(event.postback.payload);
-            console.log("Payload: " + payload);
 
             // If User is asking for Information
             if (payload == "\"information_query\"") {
@@ -96,14 +93,12 @@ app.post('/webhook/', function(req, res){
                     b3_title: b3_title,
                     b3_payload: b3_payload
                 }
-                console.log(b_title, data);
                 sendButton(sender, data);                            
             }            
         }
 
         // Check for Normal Message
-        else if (event.message && event.message.text) {
-            console.log("FROM HOOK: " + sender);           
+        else if (event.message && event.message.text) {         
             
             // Send the Query Buttons
             sendQueryButton(sender);       
