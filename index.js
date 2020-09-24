@@ -44,7 +44,26 @@ app.post('/webhook/', function(req, res){
             let text = event.message.text;
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
             console.log("FROM HOOK: " + text);
-            sendButton(sender, "Text Echo: " + text.substring(0, 100));
+
+            // If User is asking for Information
+            if (text === "Information") {
+                sendText(sender, "Information");
+            }
+
+            // If User wants to vote
+            else if (text === "Vote Candidates!") {
+                sendButton(sender, "Vote");
+            }
+
+            // Back to Main Menu
+            else if (text === "Back to Main Menu!") {
+                sendButton(sender, "Any");
+            }
+
+            // Send the Query Buttons
+            else {
+                sendButton(sender, "Any");
+            }            
         }
     }
     res.sendStatus(200);
@@ -52,7 +71,13 @@ app.post('/webhook/', function(req, res){
 
 // Functions
 function sendText(sender, text) {
-    let messageData = {text: "sender: " + sender + " | text: " + text};    
+    let messageData;
+    if (text === "Information") {
+        messageData = {text: "Frequently Asked Questions:\n" +
+    "1.) This Bot is used to assist in the voting process of the #MCMFusionTechnicity\n" +
+    "2.) Voters can only vote once. Make it count! You can't change your vote!" + 
+    "3.) Live voting count can be found here: https://mcmfusionvotationbot.herokuapp.com/"};
+    }   
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: {access_token : token},
@@ -71,50 +96,96 @@ function sendText(sender, text) {
     });
 }
 
-function sendButton(sender, text) {
-    let messageData = {text: "sender: " + sender + " | text: " + text};
-    console.log("FROM SEND:" + text);
-    request({
-        url: "https://graph.facebook.com/v2.6/me/messages",
-        qs: {access_token : token},
-        method: "POST",
-        json: {
-            recipient: {id: sender},
-            message: {
-                attachment: {
-                    type: "template",
-                    payload: {
-                        template_type: "button",
-                        text: "Hi there, Malayan! What do you want to do?",
-                        buttons: [
-                            {
-                                type: "postback",
-                                title: "FAQ",
-                                payload: "information_query"
-                            },
-                            {
-                                type: "web_url",
-                                url: "https://mcmfusionvotationbot.herokuapp.com/",
-                                title: "Check Votation Results!"
-                            },
-                            {
-                                type: "postback",
-                                title: "Vote Candidates!",
-                                payload: "vote_query"
-                            }
-                        ]
+function sendButton(sender, query) {
+    if (query === "Any") {
+        request({
+            url: "https://graph.facebook.com/v2.6/me/messages",
+            qs: {access_token : token},
+            method: "POST",
+            json: {
+                recipient: {id: sender},
+                message: {
+                    attachment: {
+                        type: "template",
+                        payload: {
+                            template_type: "button",
+                            text: "Hi there, Malayan! What do you want to do?",
+                            buttons: [
+                                {
+                                    type: "postback",
+                                    title: "FAQ",
+                                    payload: "information_query"
+                                },
+                                {
+                                    type: "web_url",
+                                    url: "https://mcmfusionvotationbot.herokuapp.com/",
+                                    title: "Check Votation Results!"
+                                },
+                                {
+                                    type: "postback",
+                                    title: "Vote Candidates!",
+                                    payload: "vote_query"
+                                }
+                            ]
+                        }
                     }
                 }
             }
-        }
-    }, function (error, response, body) {
-        if (error) {
-            console.log("sending error");
-        }
-        else if (response.body.error) {
-            console.log("response body error");
-        }
-    });
+        }, function (error, response, body) {
+            if (error) {
+                console.log("sending error");
+            }
+            else if (response.body.error) {
+                console.log("response body error");
+            }
+        });
+    }
+    else if (query === "Vote") {
+        request({
+            url: "https://graph.facebook.com/v2.6/me/messages",
+            qs: {access_token : token},
+            method: "POST",
+            json: {
+                recipient: {id: sender},
+                message: {
+                    attachment: {
+                        type: "template",
+                        payload: {
+                            template_type: "button",
+                            text: "#MCMFusionTechnicity Vote! Choose Category",
+                            buttons: [
+                                {
+                                    type: "postback",
+                                    title: "MCMFlicks and Chill",
+                                    payload: "vote_flicks_and_chill"
+                                },
+                                {
+                                    type: "postback",
+                                    title: "Show Stopper",
+                                    payload: "vote_show_stopper"
+                                },
+                                {
+                                    type: "postback",
+                                    title: "Back to Main Menu!",
+                                    payload: "vote_back_main_menu"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }, function (error, response, body) {
+            if (error) {
+                console.log("sending error");
+            }
+            else if (response.body.error) {
+                console.log("response body error");
+            }
+        });
+    }
+
+    console.log("FROM SEND:" + text);
+    
 }
 
 app.listen(app.get('port'), function(){
