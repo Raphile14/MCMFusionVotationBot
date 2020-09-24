@@ -48,7 +48,7 @@ app.post('/webhook/', function(req, res){
         let sender = event.sender.id;
 
         // Stop/Return if sent by bot
-        if (sender == 1193470794144947) return;
+        // if (sender == 1193470794144947) return;
 
         // Check if Payload
         if (event.postback) {
