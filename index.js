@@ -66,7 +66,7 @@ app.post('/webhook/', function(req, res){
         // Check for Normal Message
         else if (event.message && event.message.text) {
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
-            console.log("FROM HOOK: " + id);
+            console.log("FROM HOOK: " + sender);
             console.log("Is Postback: " + event.postback);            
             
             // Send the Query Buttons
