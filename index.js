@@ -55,17 +55,17 @@ app.post('/webhook/', function(req, res){
             // If User is asking for Information
             if (payload == "\"information_query\"") {
                 sendText(sender, "Information");
+                return;
             }
 
             // Back to Main Menu
             else if (payload == "\"vote_back_main_menu\"") {
                 sendQueryButton(sender);
+                return;
             }
 
             // Other Commands
-            else {
-                sendButton(sender, payload);
-            }
+            sendButton(sender, payload);            
         }
 
         // Check for Normal Message
