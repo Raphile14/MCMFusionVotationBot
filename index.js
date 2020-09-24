@@ -41,7 +41,7 @@ app.post('/webhook/', function(req, res){
     for (let i = 0; i < messaging_events.length; i++){
         let event = messaging_events[i];
         let sender = event.sender.id;
-        if (event.message && event.message.text && event.message.is_echo == undefined) {
+        if (event.message && event.message.text && !event.message.is_echo) {
             let text = event.message.text;
             // sendText(sender, "Text Echo: " + text.substring(0, 100));
             console.log("FROM HOOK: " + text);
