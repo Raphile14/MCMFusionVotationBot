@@ -47,6 +47,9 @@ app.post('/webhook/', function(req, res){
         let event = messaging_events[i];
         let sender = event.sender.id;
 
+        // Stop/Return if sent by bot
+        if (sender == 1193470794144947) return;
+
         // Check if Payload
         if (event.postback) {
             let payload = JSON.stringify(event.postback.payload);
@@ -73,7 +76,7 @@ app.post('/webhook/', function(req, res){
                 let b3_title, b3_payload;
 
                 // Vote Query
-                if (query == "\"vote_query\"") {
+                if (payload == "\"vote_query\"") {
                     b_title = Config.vote.title;
                     b1_title = Config.vote.b1_tittle;
                     b1_payload = Config.vote.b1_payload;
@@ -84,7 +87,7 @@ app.post('/webhook/', function(req, res){
                 }
 
                 // Flicks and Chill
-                else if (query == "\"vote_flicks_and_chill\"") {
+                else if (payload == "\"vote_flicks_and_chill\"") {
                     b_title = Config.fac.title;
                     b1_title = Config.fac.b1_tittle;
                     b1_payload = Config.fac.b1_payload;
@@ -95,7 +98,7 @@ app.post('/webhook/', function(req, res){
                 }
 
                 // Show Stopper
-                else if (query == "\"vote_show_stopper\"") {
+                else if (payload == "\"vote_show_stopper\"") {
                     b_title = Config.ss.title;
                     b1_title = Config.ss.b1_tittle;
                     b1_payload = Config.ss.b1_payload;
@@ -104,8 +107,19 @@ app.post('/webhook/', function(req, res){
                     b3_title = Config.ss.b3_tittle;
                     b3_payload = Config.ss.b3_payload;
                 }
-                console.log(b_title, b1_title, b2_title, b3_title);
-                sendButton(sender, payload);            
+                let data = {
+                    b_title: b_title,
+                    b1_title: b1_title,
+                    b1_payload: b1_payload,
+                    
+                    b2_title: b2_title,
+                    b2_payload: b2_payload,
+
+                    b3_title: b3_title,
+                    b3_payload: b3_payload
+                }
+                console.log(b_title, data);
+                sendButton(sender, data);            
             }            
         }
 
@@ -148,7 +162,7 @@ function sendText(sender, text) {
 }
 
 // For Specialized Buttons
-function sendButton(sender, query) {        
+function sendButton(sender, data) {        
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: {access_token : token},
@@ -160,22 +174,22 @@ function sendButton(sender, query) {
                     type: "template",
                     payload: {
                         template_type: "button",
-                        text: b_title,
+                        text: data.b_title,
                         buttons: [
                             {
                                 type: "postback",
-                                title: b1_title,
-                                payload: b1_payload
+                                title: data.b1_title,
+                                payload: data.b1_payload
                             },
                             {
                                 type: "postback",
-                                title: b2_title,
-                                payload: b2_payload
+                                title: data.b2_title,
+                                payload: data.b2_payload
                             },
                             {
                                 type: "postback",
-                                title: b3_title,
-                                payload: b3_payload
+                                title: data.b3_title,
+                                payload: data.b3_payload
                             }
                         ]
                     }

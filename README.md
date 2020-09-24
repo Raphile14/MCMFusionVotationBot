@@ -1,6 +1,9 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.5-f (09/24/2020)
+- Debugging
+
 indev 0.2.5-e (09/24/2020)
 - Debugging
 
