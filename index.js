@@ -41,37 +41,36 @@ app.post('/webhook/', function(req, res){
     for (let i = 0; i < messaging_events.length; i++){
         let event = messaging_events[i];
         let sender = event.sender.id;
-        if (event.message && event.message.text && !event.message.is_echo) {
-            let text = event.message.text;
-            // sendText(sender, "Text Echo: " + text.substring(0, 100));
-            console.log("FROM HOOK: " + text);
-            console.log("Is Postback: " + event.postback);
 
-            // Check if Payload
-            if (event.postback) {
-                let payload = JSON.stringify(event.postback.payload);
-                console.log("Payload: " + payload);
+        // Check if Payload
+        if (event.postback) {
+            let payload = JSON.stringify(event.postback.payload);
+            console.log("Payload: " + payload);
 
-                // If User is asking for Information
-                if (payload === "\"information_query\"") {
-                    sendText(sender, "Information");
-                }
-
-                // If User wants to vote
-                else if (payload === "\"vote_query\"") {
-                    sendButton(sender, "Vote");
-                }
-
-                // Back to Main Menu
-                else if (payload === "\"vote_back_main_menu\"") {
-                    sendButton(sender, "Any");
-                }
+            // If User is asking for Information
+            if (payload === "\'information_query\'") {
+                sendText(sender, "Information");
             }
+
+            // If User wants to vote
+            else if (payload === "\'vote_query\'") {
+                sendButton(sender, "Vote");
+            }
+
+            // Back to Main Menu
+            else if (payload === "\'vote_back_main_menu\'") {
+                sendButton(sender, "Any");
+            }
+        }
+
+        // Check for Normal Message
+        else if (event.message && event.message.text) {
+            // sendText(sender, "Text Echo: " + text.substring(0, 100));
+            console.log("FROM HOOK: " + id);
+            console.log("Is Postback: " + event.postback);            
             
             // Send the Query Buttons
-            else {
-                sendButton(sender, "Any");
-            }            
+            sendButton(sender, "Any");       
         }
     }
     res.sendStatus(200);
