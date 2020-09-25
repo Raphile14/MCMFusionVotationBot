@@ -1,6 +1,11 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.10 (09/25/2020)
+- Code optimization
+- Voting Functionality
+- Debugging
+
 indev 0.2.9-m (09/25/2020)
 - Ignore Data worksheet on github (Did not work lel. Im such a noob)
 

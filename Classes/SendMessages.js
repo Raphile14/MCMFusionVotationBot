@@ -13,7 +13,13 @@ module.exports = class SendMessages {
             "1.) This Bot is used to assist in the voting process of the #MCMFusionTechnicity\n" +
             "2.) Voters can only vote once. Make it count! You can't change your vote!\n" + 
             "3.) Live voting count can be found here: " + this.urlResults};
+        }
+        else if (text === "Vote Success") {
+            messageData = {text: "Successfully submitted your vote! Thank you!"}
         }   
+        else if (text === "Vote Fail") {
+            messageData = {text: "Vote failed! You already voted for this category!"}
+        } 
         request({
             url: this.urlPOST,
             qs: {access_token : this.token},

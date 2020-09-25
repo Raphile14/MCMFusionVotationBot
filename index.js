@@ -8,6 +8,7 @@ const Voter = require('./Classes/Voter.js');
 const Config = require('./Classes/Config.json');
 const VDatabase = require('./Classes/VoteDatabase.js');
 const sm = require('./Classes/SendMessages.js');
+const vl = require('./Classes/VotingLogic.js');
 
 // Initialization
 const app = express();
@@ -23,44 +24,30 @@ let cacheConfigJSON = [];
 let cacheVotingPayloads = [];
 let categories = ["shsShowStopper", "cShowStopper", "shsFlicksAndChill", "cFlicksAndChill"];
 
+// TODO: Use these entries to automate website generation
+let cacheSSSHSEntries = [];
+let cacheSSCEntries = [];
+let cacheFACSHSEntries = [];
+let cacheFACCEntries = [];
+let cacheAllEntries = [];
+
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let VoteDatabase = new VDatabase(categories);
 let SendMessages = new sm(token);
+let VotingLogic = new vl(cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries);
 
-// TODO: Use these entries to automate website generation
-let cacheSSSHSEntries = [];
-let cacheSSCEntries = [];
-let cacheFACSHSEntries=[];
-let cacheFACCEntries = [];
+// Initiating Commands
+VotingLogic.readParticipants(); // Read Config Participants
+VoteDatabase.checkDatabase(); // Check or generate xlsx database
 
-// Read to storage Config JSON
-for (var key in Config) {
-    cacheConfigJSON[key] = Config[key];
-    if (cacheConfigJSON[key].b1_payload.includes("facSHSVote") || cacheConfigJSON[key].b1_payload.includes("facCVote")
-    || cacheConfigJSON[key].b1_payload.includes("ssCVote") || cacheConfigJSON[key].b1_payload.includes("ssSHSVote")) {
-        cacheVotingPayloads.push(cacheConfigJSON[key].b1_payload);
-    }
-    if (key.includes("ssC")) {
-        cacheSSCEntries.push(key);
-    }
-    else if (key.includes("ssSHS")) {
-        cacheSSSHSEntries.push(key);
-    }
-    else if (key.includes("facC")) {
-        cacheFACCEntries.push(key);
-    }
-    else if (key.includes("facSHS")) {
-        cacheFACSHSEntries.push(key);
-    }
-}
+// Debug Logs
 console.log(cacheFACCEntries);
 console.log(cacheFACSHSEntries);
 console.log(cacheSSCEntries);
 console.log(cacheSSSHSEntries);
-
-// Check or generate xlsx database
-VoteDatabase.checkDatabase();
+console.log(cacheAllEntries);
+console.log(cacheVotingPayloads);
 
 // Client Use
 app.use(express.static(__dirname + '/client'));
@@ -93,26 +80,42 @@ app.post('/webhook/', function(req, res){
 
         // Check if Payload
         if (event.postback) {
-            let payload = JSON.stringify(event.postback.payload);
+            let payload = JSON.stringify(event.postback.payload).replace(/['"]+/g, '');
             // If User is asking for Information
-            if (payload == "\"information_query\"") {
+            if (payload == "information_query") {
                 SendMessages.sendText(sender, "Information");
             }
             // Back to Main Menu
-            else if (payload == "\"vote_back_main_menu\"") {
+            else if (payload == "vote_back_main_menu") {
                 SendMessages.sendQueryButton(sender);
             }
+            // If Payload is a Vote            
+            else if (cacheVotingPayloads.includes(payload)) {
+                SendMessages.sendText(sender, "Vote Success");
+            }
+            // // Voted College MCMFlicks and Chill
+            // // Voted SHS MCMFlicks and Chill
+            // else if (cacheFACSHSEntries.includes(payload)) {
+                
+            // }
+            // // Voted College Show Stopper
+            // else if (cacheSSCEntries.includes(payload)) {
+                
+            // }
+            // // Voted SHS Show Stopper
+            // else if (cacheSSSHSEntries.includes(payload)) {
+                
+            // }
             else {
                 // Other Commands
                 // Button Variables
-                let query = payload.replace(/['"]+/g, '');
-                let b_title = cacheConfigJSON[query].title;
-                let b1_title = cacheConfigJSON[query].b1_title;                
-                let b1_payload = cacheConfigJSON[query].b1_payload;
-                let b2_title = cacheConfigJSON[query].b2_title;
-                let b2_payload = cacheConfigJSON[query].b2_payload;
-                let b3_title = cacheConfigJSON[query].b3_title;
-                let b3_payload = cacheConfigJSON[query].b3_payload;
+                let b_title = cacheConfigJSON[payload].title;
+                let b1_title = cacheConfigJSON[payload].b1_title;                
+                let b1_payload = cacheConfigJSON[payload].b1_payload;
+                let b2_title = cacheConfigJSON[payload].b2_title;
+                let b2_payload = cacheConfigJSON[payload].b2_payload;
+                let b3_title = cacheConfigJSON[payload].b3_title;
+                let b3_payload = cacheConfigJSON[payload].b3_payload;
 
                 let data = {
                     b_title: b_title,
