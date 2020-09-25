@@ -4,11 +4,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Config = require('./Classes/Config.json');
 const VDatabase = require('./Classes/VoteDatabase.js');
 const sm = require('./Classes/SendMessages.js');
-const vl = require('./Classes/VotingLogic.js');
-const { stat } = require('fs');
 
 // Initialization
 const app = express();
@@ -33,23 +30,24 @@ let cacheAllEntries = []; // All Entries
 
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
-let VoteDatabase = new VDatabase(categories);
 let SendMessages = new sm(token);
-let VotingLogic = new vl(Voters, categories, cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries);
+let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries);
 
 // Initiating Commands
-VotingLogic.init();
-VotingLogic.readParticipants(); // Read Config Participants
+VoteDatabase.init();
+VoteDatabase.readParticipants(); // Read Config Participants
 VoteDatabase.checkDatabase(); // Check or generate xlsx database
+VoteDatabase.readDatabase(); // Read Database if data is already present
+console.log(Voters);
 
 // Debug Logs
 // console.log(cacheFACCEntries);
 // console.log(cacheFACSHSEntries);
 // console.log(cacheSSCEntries);
 // console.log(cacheSSSHSEntries);
-console.log(cacheAllEntries);
-console.log(cacheVotingPayloads);
-console.log(Voters);
+// console.log(cacheAllEntries);
+// console.log(cacheVotingPayloads);
+// console.log(Voters);
 
 // Client Use
 app.use(express.static(__dirname + '/client'));
@@ -93,23 +91,10 @@ app.post('/webhook/', function(req, res){
             }
             // If Payload is a Vote            
             else if (cacheVotingPayloads.includes(payload)) {
-                let status = VotingLogic.submitVote(sender, payload);
+                let status = VoteDatabase.submitVote(sender, payload);
                 if (status) SendMessages.sendText(sender, "Vote Success");
                 else SendMessages.sendText(sender, "Vote Fail");          
             }
-            // // Voted College MCMFlicks and Chill
-            // // Voted SHS MCMFlicks and Chill
-            // else if (cacheFACSHSEntries.includes(payload)) {
-                
-            // }
-            // // Voted College Show Stopper
-            // else if (cacheSSCEntries.includes(payload)) {
-                
-            // }
-            // // Voted SHS Show Stopper
-            // else if (cacheSSSHSEntries.includes(payload)) {
-                
-            // }
             else {
                 // Other Commands
                 // Button Variables
