@@ -162,7 +162,15 @@ function sendText(sender, text) {
             recipient: {id: sender},
             message: messageData
         }
-    }, errorMessage(error, response, body));
+    }, function (error, response, body) {
+        if (error) {
+            console.log("sending error");
+        }
+        else if (response.body.error) {
+            console.log(response.body.error);
+            console.log("response body error");
+        }
+    });
 }
 
 // For Specialized Buttons
@@ -200,7 +208,15 @@ function sendButton(sender, data) {
                 }
             }
         }
-    }, errorMessage(error, response, body));
+    }, function (error, response, body) {
+        if (error) {
+            console.log("sending error");
+        }
+        else if (response.body.error) {
+            console.log(response.body.error);
+            console.log("response body error");
+        }
+    });
 }
 
 // For Main Button
@@ -238,7 +254,15 @@ function sendQueryButton(sender) {
                 }
             }
         }
-    }, errorMessage(error, response, body)); 
+    }, function (error, response, body) {
+        if (error) {
+            console.log("sending error");
+        }
+        else if (response.body.error) {
+            console.log(response.body.error);
+            console.log("response body error");
+        }
+    }); 
 }
 
 function errorMessage (error, response, body) {
