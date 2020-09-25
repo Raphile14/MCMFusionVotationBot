@@ -132,10 +132,11 @@ module.exports = class VoteDatabase {
             // TODO: Add counter here
             // TODO: Save to database here
             let wb = XLSX.readFile("Data/MCMFusionTechnicityVotationLogs.xlsx", {cellDates: true});
-            console.log(this.Voters[selectedCategory]);
+            // console.log(this.Voters[selectedCategory]);
+            console.log(format);
             let newData = XLSX.utils.aoa_to_sheet(format);
-            wb.Sheets[selectedCategory] = newData;
             console.log(newData);
+            wb.Sheets[selectedCategory] = newData;            
             XLSX.writeFile(wb, "Data/MCMFusionTechnicityVotationLogs.xlsx");
             console.log("Database Updated by Vote");
             return true;
