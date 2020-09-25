@@ -163,13 +163,14 @@ function sendText(sender, text) {
             message: messageData
         }
     }, function (error, response, body) {
-        if (error) {
-            console.log("sending error");
-        }
-        else if (response.body.error) {
-            console.log(response.body.error);
-            console.log("response body error");
-        }
+        SendMessages.errorMessage(error, response, body);
+        // if (error) {
+        //     console.log("sending error");
+        // }
+        // else if (response.body.error) {
+        //     console.log(response.body.error);
+        //     console.log("response body error");
+        // }
     });
 }
 
@@ -209,13 +210,14 @@ function sendButton(sender, data) {
             }
         }
     }, function (error, response, body) {
-        if (error) {
-            console.log("sending error");
-        }
-        else if (response.body.error) {
-            console.log(response.body.error);
-            console.log("response body error");
-        }
+        SendMessages.errorMessage(error, response, body);
+        // if (error) {
+        //     console.log("sending error");
+        // }
+        // else if (response.body.error) {
+        //     console.log(response.body.error);
+        //     console.log("response body error");
+        // }
     });
 }
 
@@ -255,13 +257,14 @@ function sendQueryButton(sender) {
             }
         }
     }, function (error, response, body) {
-        if (error) {
-            console.log("sending error");
-        }
-        else if (response.body.error) {
-            console.log(response.body.error);
-            console.log("response body error");
-        }
+        SendMessages.errorMessage(error, response, body);
+        // if (error) {
+        //     console.log("sending error");
+        // }
+        // else if (response.body.error) {
+        //     console.log(response.body.error);
+        //     console.log("response body error");
+        // }
     }); 
 }
 
