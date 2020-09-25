@@ -24,7 +24,7 @@ module.exports = class SendMessages {
                 message: messageData
             }
         }, function (error, response, body) {
-            this.errorMessage(error, response, body);
+            errorMessage(error, response, body);
             // if (error) {
             //     console.log("sending error");
             // }
@@ -70,7 +70,7 @@ module.exports = class SendMessages {
                 }
             }
         }, function (error, response, body) {
-            this.errorMessage(error, response, body);
+            errorMessage(error, response, body);
             // if (error) {
             //     console.log("sending error");
             // }
@@ -116,7 +116,7 @@ module.exports = class SendMessages {
                 }
             }
         }, function (error, response, body) {
-            this.errorMessage(error, response, body);
+            errorMessage(error, response, body);
             // if (error) {
             //     console.log("sending error");
             // }
