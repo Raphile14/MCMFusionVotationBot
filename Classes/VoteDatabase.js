@@ -131,6 +131,7 @@ module.exports = class VoteDatabase {
             console.log(this.Voters[selectedCategory]);
             let newData = XLSX.utils.json_to_sheet(this.Voters[selectedCategory]);
             wb.Sheets[selectedCategory] = newData;
+            console.log(newData);
             XLSX.writeFile(wb, "Data/MCMFusionTechnicityVotationLogs.xlsx");
             console.log("Database Updated by Vote");
             return true;
