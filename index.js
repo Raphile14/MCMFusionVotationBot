@@ -4,6 +4,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const request = require('request');
 const Voter = require('./Classes/Voter.js');
 const Config = require('./Classes/Config.json');
 const VDatabase = require('./Classes/VoteDatabase.js');
