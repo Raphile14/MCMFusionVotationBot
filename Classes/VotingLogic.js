@@ -1,5 +1,5 @@
 const Config = require('./Config.json');
-const Voter = require('./Classes/Voter.js');
+const Voter = require('./Voter.js');
 
 module.exports = class VotingLogic {
     constructor(Voters, categories, cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries) {
