@@ -22,32 +22,22 @@ let cacheVotingPayloads = []; // Contains Voting Payload Keywords
 let categories = ["ssSHS", "ssC", "facSHS", "facC"];
 
 // TODO: Use these entries to automate website generation
-let cacheSSSHSEntries = []; // SHS Show Stopper Entries
-let cacheSSCEntries = []; // College Show Stopper Entries
-let cacheFACSHSEntries = []; // SHS Flicks and Chill Entries
-let cacheFACCEntries = []; // College Flicks and Chill Entries
-let cacheAllEntries = []; // All Entries
+// let cacheSSSHSEntries = []; // SHS Show Stopper Entries
+// let cacheSSCEntries = []; // College Show Stopper Entries
+// let cacheFACSHSEntries = []; // SHS Flicks and Chill Entries
+// let cacheFACCEntries = []; // College Flicks and Chill Entries
+// let cacheAllEntries = []; // All Entries
 
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let SendMessages = new sm(token);
-let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries);
+let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads, /*cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries*/);
 
 // Initiating Commands
 VoteDatabase.init();
 VoteDatabase.readParticipants(); // Read Config Participants
 VoteDatabase.checkDatabase(); // Check or generate xlsx database
 VoteDatabase.readDatabase(); // Read Database if data is already present
-console.log(Voters);
-
-// Debug Logs
-// console.log(cacheFACCEntries);
-// console.log(cacheFACSHSEntries);
-// console.log(cacheSSCEntries);
-// console.log(cacheSSSHSEntries);
-// console.log(cacheAllEntries);
-// console.log(cacheVotingPayloads);
-// console.log(Voters);
 
 // Client Use
 app.use(express.static(__dirname + '/client'));

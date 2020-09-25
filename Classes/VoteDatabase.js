@@ -3,16 +3,16 @@ const fs = require('fs');
 const Config = require('./Config.json');
 
 module.exports = class VoteDatabase {
-    constructor(Voters, categories, cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries) {
+    constructor(Voters, categories, cacheConfigJSON, cacheVotingPayloads /*, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries*/) {
         this.Voters = Voters;
         this.categories = categories;
         this.cacheConfigJSON = cacheConfigJSON;
         this.cacheVotingPayloads = cacheVotingPayloads;
-        this.cacheAllEntries = cacheAllEntries;
-        this.cacheSSSHSEntries = cacheSSSHSEntries;
-        this.cacheSSCEntries = cacheSSCEntries;
-        this.cacheFACSHSEntries = cacheFACSHSEntries;
-        this.cacheFACCEntries = cacheFACCEntries;
+        // this.cacheAllEntries = cacheAllEntries;
+        // this.cacheSSSHSEntries = cacheSSSHSEntries;
+        // this.cacheSSCEntries = cacheSSCEntries;
+        // this.cacheFACSHSEntries = cacheFACSHSEntries;
+        // this.cacheFACCEntries = cacheFACCEntries;
     }
     // Initialize Voting Logic
     init() {
@@ -28,22 +28,22 @@ module.exports = class VoteDatabase {
             if (this.cacheConfigJSON[key].b1_payload.includes("facSHSVote") || this.cacheConfigJSON[key].b1_payload.includes("facCVote") || this.cacheConfigJSON[key].b1_payload.includes("ssCVote") || this.cacheConfigJSON[key].b1_payload.includes("ssSHSVote")) {
                 this.cacheVotingPayloads.push(this.cacheConfigJSON[key].b1_payload);
             }
-            if (key.includes("ssC")) {
-                this.cacheSSCEntries.push(key);
-                this.cacheAllEntries.push(key);
-            }
-            else if (key.includes("ssSHS")) {
-                this.cacheSSSHSEntries.push(key);
-                this.cacheAllEntries.push(key);
-            }
-            else if (key.includes("facC")) {
-                this.cacheFACCEntries.push(key);
-                this.cacheAllEntries.push(key);
-            }
-            else if (key.includes("facSHS")) {
-                this.cacheFACSHSEntries.push(key);
-                this.cacheAllEntries.push(key);
-            }
+            // if (key.includes("ssC")) {
+            //     this.cacheSSCEntries.push(key);
+            //     this.cacheAllEntries.push(key);
+            // }
+            // else if (key.includes("ssSHS")) {
+            //     this.cacheSSSHSEntries.push(key);
+            //     this.cacheAllEntries.push(key);
+            // }
+            // else if (key.includes("facC")) {
+            //     this.cacheFACCEntries.push(key);
+            //     this.cacheAllEntries.push(key);
+            // }
+            // else if (key.includes("facSHS")) {
+            //     this.cacheFACSHSEntries.push(key);
+            //     this.cacheAllEntries.push(key);
+            // }
         }
     }
     checkDatabase () {             
@@ -92,16 +92,16 @@ module.exports = class VoteDatabase {
 
         // Store data to Voters Array
         // TODO: Add counter here
-        let data_ssSHS = json_ssSHS.map(function(record){
+        json_ssSHS.map(function(record){
             storageVoters[storageCategories[0]][record.id] = record;            
         });
-        let data_ssC = json_ssC.map(function(record){
+        json_ssC.map(function(record){
             storageVoters[storageCategories[1]][record.id] = record;
         });
-        let data_facSHS = json_facSHS.map(function(record){
+        json_facSHS.map(function(record){
             storageVoters[storageCategories[2]][record.id] = record;
         });
-        let data_facC = json_facC.map(function(record){
+        json_facC.map(function(record){
             storageVoters[storageCategories[3]][record.id] = record;
         });
     }
@@ -130,12 +130,8 @@ module.exports = class VoteDatabase {
                 format = format.concat([this.Voters[selectedCategory][people]]);
             }
             // TODO: Add counter here
-            // TODO: Save to database here
             let wb = XLSX.readFile("Data/MCMFusionTechnicityVotationLogs.xlsx", {cellDates: true});
-            // console.log(this.Voters[selectedCategory]);
-            console.log(format);
             let newData = XLSX.utils.aoa_to_sheet(format);
-            console.log(newData);
             wb.Sheets[selectedCategory] = newData;            
             XLSX.writeFile(wb, "Data/MCMFusionTechnicityVotationLogs.xlsx");
             console.log("Database Updated by Vote");
