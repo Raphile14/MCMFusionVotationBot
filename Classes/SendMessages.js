@@ -1,5 +1,4 @@
 const request = require('request');
-const bodyParser = require('body-parser');
 
 module.exports = class SendMessages {
     constructor(token, app) {
@@ -24,7 +23,16 @@ module.exports = class SendMessages {
                 recipient: {id: sender},
                 message: messageData
             }
-        }, this.errorMessage(error, response, body));
+        }, function (error, response, body) {
+            this.errorMessage(error, response, body);
+            // if (error) {
+            //     console.log("sending error");
+            // }
+            // else if (response.body.error) {
+            //     console.log(response.body.error);
+            //     console.log("response body error");
+            // }
+        });
     }
 
     sendButton(sender, data) {        
@@ -61,7 +69,16 @@ module.exports = class SendMessages {
                     }
                 }
             }
-        }, this.errorMessage(error, response, body));
+        }, function (error, response, body) {
+            this.errorMessage(error, response, body);
+            // if (error) {
+            //     console.log("sending error");
+            // }
+            // else if (response.body.error) {
+            //     console.log(response.body.error);
+            //     console.log("response body error");
+            // }
+        });
     }
 
     sendQueryButton(sender) {
@@ -98,7 +115,16 @@ module.exports = class SendMessages {
                     }
                 }
             }
-        }, this.errorMessage(error, response, body)); 
+        }, function (error, response, body) {
+            this.errorMessage(error, response, body);
+            // if (error) {
+            //     console.log("sending error");
+            // }
+            // else if (response.body.error) {
+            //     console.log(response.body.error);
+            //     console.log("response body error");
+            // }
+        }); 
     }
 
     // For error Messages
