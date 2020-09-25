@@ -11,7 +11,7 @@ const sm = require('./Classes/SendMessages.js');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-app.set('port', (process.env.PORT || 5000));
+// app.set('port', (process.env.PORT || 5000));
 
 // Allows the process of data
 app.use(bodyParser.urlencoded({extended: false}));
@@ -124,6 +124,6 @@ app.post('/webhook/', function(req, res){
     res.sendStatus(200);
 });
 
-server.listen(app.get('port'), function(){
-    console.log("Running on Port: " + app.get('port'));
+server.listen((process.env.PORT || 5000), function(){
+    console.log("Server Running");
 })
