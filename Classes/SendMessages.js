@@ -1,7 +1,7 @@
 const request = require('request');
 
 module.exports = class SendMessages {
-    constructor(token, app) {
+    constructor(token) {
         this.urlPOST = "https://graph.facebook.com/v2.6/me/messages";
         this.urlResults = "https://mcmfusionvotationbot.herokuapp.com/";
         this.token = token;
