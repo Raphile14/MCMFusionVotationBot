@@ -1,6 +1,10 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.11 (09/25/2020)
+- Code optimization
+- Incache Database
+
 indev 0.2.10 (09/25/2020)
 - Code optimization
 - Voting Functionality

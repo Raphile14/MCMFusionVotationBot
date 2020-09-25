@@ -4,11 +4,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Voter = require('./Classes/Voter.js');
 const Config = require('./Classes/Config.json');
 const VDatabase = require('./Classes/VoteDatabase.js');
 const sm = require('./Classes/SendMessages.js');
 const vl = require('./Classes/VotingLogic.js');
+const { stat } = require('fs');
 
 // Initialization
 const app = express();
@@ -20,34 +20,36 @@ app.use(bodyParser.json());
 
 // Cached Storage
 let Voters = [];
-let cacheConfigJSON = [];
-let cacheVotingPayloads = [];
-let categories = ["shsShowStopper", "cShowStopper", "shsFlicksAndChill", "cFlicksAndChill"];
+let cacheConfigJSON = []; // Contains data from participants
+let cacheVotingPayloads = []; // Contains Voting Payload Keywords
+let categories = ["ssSHS", "ssC", "facSHS", "facC"];
 
 // TODO: Use these entries to automate website generation
-let cacheSSSHSEntries = [];
-let cacheSSCEntries = [];
-let cacheFACSHSEntries = [];
-let cacheFACCEntries = [];
-let cacheAllEntries = [];
+let cacheSSSHSEntries = []; // SHS Show Stopper Entries
+let cacheSSCEntries = []; // College Show Stopper Entries
+let cacheFACSHSEntries = []; // SHS Flicks and Chill Entries
+let cacheFACCEntries = []; // College Flicks and Chill Entries
+let cacheAllEntries = []; // All Entries
 
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let VoteDatabase = new VDatabase(categories);
 let SendMessages = new sm(token);
-let VotingLogic = new vl(cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries);
+let VotingLogic = new vl(Voters, categories, cacheConfigJSON, cacheVotingPayloads, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries);
 
 // Initiating Commands
+VotingLogic.init();
 VotingLogic.readParticipants(); // Read Config Participants
 VoteDatabase.checkDatabase(); // Check or generate xlsx database
 
 // Debug Logs
-console.log(cacheFACCEntries);
-console.log(cacheFACSHSEntries);
-console.log(cacheSSCEntries);
-console.log(cacheSSSHSEntries);
+// console.log(cacheFACCEntries);
+// console.log(cacheFACSHSEntries);
+// console.log(cacheSSCEntries);
+// console.log(cacheSSSHSEntries);
 console.log(cacheAllEntries);
 console.log(cacheVotingPayloads);
+console.log(Voters);
 
 // Client Use
 app.use(express.static(__dirname + '/client'));
@@ -91,7 +93,9 @@ app.post('/webhook/', function(req, res){
             }
             // If Payload is a Vote            
             else if (cacheVotingPayloads.includes(payload)) {
-                SendMessages.sendText(sender, "Vote Success");
+                let status = VotingLogic.submitVote(sender, payload);
+                if (status) SendMessages.sendText(sender, "Vote Success");
+                else SendMessages.sendText(sender, "Vote Fail");          
             }
             // // Voted College MCMFlicks and Chill
             // // Voted SHS MCMFlicks and Chill
