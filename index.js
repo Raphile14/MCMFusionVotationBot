@@ -125,5 +125,5 @@ app.post('/webhook/', function(req, res){
 });
 
 server.listen((process.env.PORT || 5000), function(){
-    console.log("Server Running");
+    console.log("Server Running on Port: " + (process.env.PORT || 5000));
 })
