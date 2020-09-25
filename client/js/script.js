@@ -5,6 +5,7 @@ socket.on("usersOnline", function(data){
 });
 
 socket.on("scoreUpdate", function(data){
+    console.log(data);
     for (var key in data.count) {
         document.getElementById(key).innerText =  data.count[key];
         console.log(key);
