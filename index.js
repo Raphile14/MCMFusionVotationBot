@@ -96,7 +96,7 @@ app.post('/webhook/', function(req, res){
                 let status = VoteDatabase.submitVote(sender, payload);
                 if (status) {
                     SendMessages.sendText(sender, "Vote Success");
-                    io.emit("scoreUpdate", {count: cacheVoteCount});
+                    io.emit("test", cacheVoteCount);
                 } 
                 else SendMessages.sendText(sender, "Vote Fail");          
             }
