@@ -27,6 +27,8 @@ let categories = ["shsShowStopper", "cShowStopper", "shsFlicksAndChill", "cFlick
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let VoteDatabase = new VDatabase(categories);
 let SendMessages = new sm(token, app);
+let urlPOST = "https://graph.facebook.com/v2.6/me/messages";
+let urlResults = "https://mcmfusionvotationbot.herokuapp.com/";
 
 // TODO: Use these entries to automate website generation
 let cacheSSSHSEntries = [];
@@ -97,12 +99,12 @@ app.post('/webhook/', function(req, res){
 
             // If User is asking for Information
             if (payload == "\"information_query\"") {
-                SendMessages.sendText(sender, "Information");
+                sendText(sender, "Information");
             }
 
             // Back to Main Menu
             else if (payload == "\"vote_back_main_menu\"") {
-                SendMessages.sendQueryButton(sender);
+                sendQueryButton(sender);
             }
 
             else {
@@ -128,7 +130,7 @@ app.post('/webhook/', function(req, res){
                     b3_title: b3_title,
                     b3_payload: b3_payload
                 }
-                SendMessages.sendButton(sender, data);                            
+                sendButton(sender, data);                            
             }            
         }
 
@@ -136,107 +138,107 @@ app.post('/webhook/', function(req, res){
         else if (event.message && event.message.text) {         
             
             // Send the Query Buttons
-            SendMessages.sendQueryButton(sender);       
+            sendQueryButton(sender);       
         }
     }
     res.sendStatus(200);
 });
 
-// // Functions
-// function sendText(sender, text) {
-//     let messageData;
-//     if (text === "Information") {
-//         messageData = {text: "Frequently Asked Questions:\n\n" +
-//         "1.) This Bot is used to assist in the voting process of the #MCMFusionTechnicity\n" +
-//         "2.) Voters can only vote once. Make it count! You can't change your vote!\n" + 
-//         "3.) Live voting count can be found here: " + urlResults};
-//     }   
-//     request({
-//         url: urlPOST,
-//         qs: {access_token : token},
-//         method: "POST",
-//         json: {
-//             recipient: {id: sender},
-//             message: messageData
-//         }
-//     }, Utility.errorMessage(error, response, body));
-// }
+// Functions
+function sendText(sender, text) {
+    let messageData;
+    if (text === "Information") {
+        messageData = {text: "Frequently Asked Questions:\n\n" +
+        "1.) This Bot is used to assist in the voting process of the #MCMFusionTechnicity\n" +
+        "2.) Voters can only vote once. Make it count! You can't change your vote!\n" + 
+        "3.) Live voting count can be found here: " + urlResults};
+    }   
+    request({
+        url: urlPOST,
+        qs: {access_token : token},
+        method: "POST",
+        json: {
+            recipient: {id: sender},
+            message: messageData
+        }
+    }, SendMessages.errorMessage(error, response, body));
+}
 
 // For Specialized Buttons
-// function sendButton(sender, data) {        
-//     request({
-//         url: urlPOST,
-//         qs: {access_token : token},
-//         method: "POST",
-//         json: {
-//             recipient: {id: sender},
-//             message: {
-//                 attachment: {
-//                     type: "template",
-//                     payload: {
-//                         template_type: "button",
-//                         text: data.b_title,
-//                         buttons: [
-//                             {
-//                                 type: "postback",
-//                                 title: data.b1_title,
-//                                 payload: data.b1_payload
-//                             },
-//                             {
-//                                 type: "postback",
-//                                 title: data.b2_title,
-//                                 payload: data.b2_payload
-//                             },
-//                             {
-//                                 type: "postback",
-//                                 title: data.b3_title,
-//                                 payload: data.b3_payload
-//                             }
-//                         ]
-//                     }
-//                 }
-//             }
-//         }
-//     }, Utility.errorMessage(error, response, body));
-// }
+function sendButton(sender, data) {        
+    request({
+        url: urlPOST,
+        qs: {access_token : token},
+        method: "POST",
+        json: {
+            recipient: {id: sender},
+            message: {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "button",
+                        text: data.b_title,
+                        buttons: [
+                            {
+                                type: "postback",
+                                title: data.b1_title,
+                                payload: data.b1_payload
+                            },
+                            {
+                                type: "postback",
+                                title: data.b2_title,
+                                payload: data.b2_payload
+                            },
+                            {
+                                type: "postback",
+                                title: data.b3_title,
+                                payload: data.b3_payload
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }, SendMessages.errorMessage(error, response, body));
+}
 
 // For Main Button
-// function sendQueryButton(sender) {
-//     request({
-//         url: urlPOST,
-//         qs: {access_token : token},
-//         method: "POST",
-//         json: {
-//             recipient: {id: sender},
-//             message: {
-//                 attachment: {
-//                     type: "template",
-//                     payload: {
-//                         template_type: "button",
-//                         text: "Hi there, Malayan! What do you want to do?",
-//                         buttons: [
-//                             {
-//                                 type: "postback",
-//                                 title: "FAQ",
-//                                 payload: "information_query"
-//                             },
-//                             {
-//                                 type: "web_url",
-//                                 url: urlResults,
-//                                 title: "Check Votation Results!"
-//                             },
-//                             {
-//                                 type: "postback",
-//                                 title: "Vote Candidates!",
-//                                 payload: "vote"
-//                             }
-//                         ]
-//                     }
-//                 }
-//             }
-//         }
-//     }, Utility.errorMessage(error, response, body)); 
-// }
+function sendQueryButton(sender) {
+    request({
+        url: urlPOST,
+        qs: {access_token : token},
+        method: "POST",
+        json: {
+            recipient: {id: sender},
+            message: {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "button",
+                        text: "Hi there, Malayan! What do you want to do?",
+                        buttons: [
+                            {
+                                type: "postback",
+                                title: "FAQ",
+                                payload: "information_query"
+                            },
+                            {
+                                type: "web_url",
+                                url: urlResults,
+                                title: "Check Votation Results!"
+                            },
+                            {
+                                type: "postback",
+                                title: "Vote Candidates!",
+                                payload: "vote"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }, SendMessages.errorMessage(error, response, body)); 
+}
 
 app.listen(app.get('port'), function(){
     console.log("Running on Port: " + app.get('port'));
