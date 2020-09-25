@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 
 // Cached Storage
 let Voters = [];
+let cacheVoteCount = [];
 let cacheConfigJSON = []; // Contains data from participants
 let cacheVotingPayloads = []; // Contains Voting Payload Keywords
 let categories = ["ssSHS", "ssC", "facSHS", "facC"];
@@ -26,7 +27,7 @@ let categories = ["ssSHS", "ssC", "facSHS", "facC"];
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let SendMessages = new sm(token);
-let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads);
+let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads, cacheVoteCount);
 let userCount = 0;
 
 // Initiating Commands
@@ -34,6 +35,8 @@ VoteDatabase.init();
 VoteDatabase.readParticipants(); // Read Config Participants
 VoteDatabase.checkDatabase(); // Check or generate xlsx database
 VoteDatabase.readDatabase(); // Read Database if data is already present
+// console.log(cacheConfigJSON);
+console.log(cacheVoteCount);
 
 // Client Use
 app.use(express.static(__dirname + '/client'));
@@ -45,14 +48,12 @@ app.get('/', function(req, res){
 
 // Socket Connection
 io.on('connection', function(socket){
-    console.log("A user has connected");
     userCount++;
 
     // Emit Player Count
     io.emit("usersOnline", {number: userCount});
 
     socket.on('disconnect', function(){
-        console.log("A user has disconnected");
         userCount--;
         io.emit("usersOnline", {number: userCount});
     })
@@ -93,7 +94,10 @@ app.post('/webhook/', function(req, res){
             // If Payload is a Vote            
             else if (cacheVotingPayloads.includes(payload)) {
                 let status = VoteDatabase.submitVote(sender, payload);
-                if (status) SendMessages.sendText(sender, "Vote Success");
+                if (status) {
+                    SendMessages.sendText(sender, "Vote Success");
+                    io.emit("test");
+                } 
                 else SendMessages.sendText(sender, "Vote Fail");          
             }
             else {
