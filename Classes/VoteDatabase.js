@@ -122,14 +122,18 @@ module.exports = class VoteDatabase {
         } 
         
         if (!this.Voters[selectedCategory][sender]) {
+            let format = [["id", "team", "date"]];
             var today = new Date();
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             this.Voters[selectedCategory][sender] = [sender, payload, date];
+            for (var people in this.Voters[selectedCategory]) {
+                format = format.concat(this.Voters[selectedCategory][people]);
+            }
             // TODO: Add counter here
             // TODO: Save to database here
             let wb = XLSX.readFile("Data/MCMFusionTechnicityVotationLogs.xlsx", {cellDates: true});
             console.log(this.Voters[selectedCategory]);
-            let newData = XLSX.utils.aoa_to_sheet(this.Voters[selectedCategory]);
+            let newData = XLSX.utils.aoa_to_sheet(format);
             wb.Sheets[selectedCategory] = newData;
             console.log(newData);
             XLSX.writeFile(wb, "Data/MCMFusionTechnicityVotationLogs.xlsx");
