@@ -1,3 +1,5 @@
+const request = require('request');
+
 module.exports = class SendMessages {
     constructor(token) {
         this.urlPOST = "https://graph.facebook.com/v2.6/me/messages";
