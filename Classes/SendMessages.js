@@ -5,7 +5,6 @@ module.exports = class SendMessages {
         this.urlPOST = "https://graph.facebook.com/v2.6/me/messages";
         this.urlResults = "https://mcmfusionvotationbot.herokuapp.com/";
         this.token = token;
-        this.app = app;
     }
     sendText(sender, text) {
         let messageData;

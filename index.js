@@ -4,7 +4,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const request = require('request');
 const Voter = require('./Classes/Voter.js');
 const Config = require('./Classes/Config.json');
 const VDatabase = require('./Classes/VoteDatabase.js');
@@ -27,9 +26,7 @@ let categories = ["shsShowStopper", "cShowStopper", "shsFlicksAndChill", "cFlick
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let VoteDatabase = new VDatabase(categories);
-let SendMessages = new sm(token, app);
-let urlPOST = "https://graph.facebook.com/v2.6/me/messages";
-let urlResults = "https://mcmfusionvotationbot.herokuapp.com/";
+let SendMessages = new sm(token);
 
 // TODO: Use these entries to automate website generation
 let cacheSSSHSEntries = [];
@@ -97,17 +94,14 @@ app.post('/webhook/', function(req, res){
         // Check if Payload
         if (event.postback) {
             let payload = JSON.stringify(event.postback.payload);
-
             // If User is asking for Information
             if (payload == "\"information_query\"") {
                 SendMessages.sendText(sender, "Information");
             }
-
             // Back to Main Menu
             else if (payload == "\"vote_back_main_menu\"") {
                 SendMessages.sendQueryButton(sender);
             }
-
             else {
                 // Other Commands
                 // Button Variables
@@ -136,147 +130,13 @@ app.post('/webhook/', function(req, res){
         }
 
         // Check for Normal Message
-        else if (event.message && event.message.text) {         
-            
+        else if (event.message && event.message.text) {                     
             // Send the Query Buttons
             SendMessages.sendQueryButton(sender);       
         }
     }
     res.sendStatus(200);
 });
-
-// // Functions
-// function sendText(sender, text) {
-//     let messageData;
-//     if (text === "Information") {
-//         messageData = {text: "Frequently Asked Questions:\n\n" +
-//         "1.) This Bot is used to assist in the voting process of the #MCMFusionTechnicity\n" +
-//         "2.) Voters can only vote once. Make it count! You can't change your vote!\n" + 
-//         "3.) Live voting count can be found here: " + urlResults};
-//     }   
-//     request({
-//         url: urlPOST,
-//         qs: {access_token : token},
-//         method: "POST",
-//         json: {
-//             recipient: {id: sender},
-//             message: messageData
-//         }
-//     }, function (error, response, body) {
-//         SendMessages.errorMessage(error, response, body);
-//         // if (error) {
-//         //     console.log("sending error");
-//         // }
-//         // else if (response.body.error) {
-//         //     console.log(response.body.error);
-//         //     console.log("response body error");
-//         // }
-//     });
-// }
-
-// // For Specialized Buttons
-// function sendButton(sender, data) {        
-//     request({
-//         url: urlPOST,
-//         qs: {access_token : token},
-//         method: "POST",
-//         json: {
-//             recipient: {id: sender},
-//             message: {
-//                 attachment: {
-//                     type: "template",
-//                     payload: {
-//                         template_type: "button",
-//                         text: data.b_title,
-//                         buttons: [
-//                             {
-//                                 type: "postback",
-//                                 title: data.b1_title,
-//                                 payload: data.b1_payload
-//                             },
-//                             {
-//                                 type: "postback",
-//                                 title: data.b2_title,
-//                                 payload: data.b2_payload
-//                             },
-//                             {
-//                                 type: "postback",
-//                                 title: data.b3_title,
-//                                 payload: data.b3_payload
-//                             }
-//                         ]
-//                     }
-//                 }
-//             }
-//         }
-//     }, function (error, response, body) {
-//         SendMessages.errorMessage(error, response, body);
-//         // if (error) {
-//         //     console.log("sending error");
-//         // }
-//         // else if (response.body.error) {
-//         //     console.log(response.body.error);
-//         //     console.log("response body error");
-//         // }
-//     });
-// }
-
-// // For Main Button
-// function sendQueryButton(sender) {
-//     request({
-//         url: urlPOST,
-//         qs: {access_token : token},
-//         method: "POST",
-//         json: {
-//             recipient: {id: sender},
-//             message: {
-//                 attachment: {
-//                     type: "template",
-//                     payload: {
-//                         template_type: "button",
-//                         text: "Hi there, Malayan! What do you want to do?",
-//                         buttons: [
-//                             {
-//                                 type: "postback",
-//                                 title: "FAQ",
-//                                 payload: "information_query"
-//                             },
-//                             {
-//                                 type: "web_url",
-//                                 url: urlResults,
-//                                 title: "Check Votation Results!"
-//                             },
-//                             {
-//                                 type: "postback",
-//                                 title: "Vote Candidates!",
-//                                 payload: "vote"
-//                             }
-//                         ]
-//                     }
-//                 }
-//             }
-//         }
-//     }, function (error, response, body) {
-//         SendMessages.errorMessage(error, response, body);
-//         // if (error) {
-//         //     console.log("sending error");
-//         // }
-//         // else if (response.body.error) {
-//         //     console.log(response.body.error);
-//         //     console.log("response body error");
-//         // }
-//     }); 
-// }
-
-function errorMessage (error, response, body) {
-    if (error) {
-        console.log("sending error");
-    }
-    else if (response.body.error) {
-        console.log(response.body.error);
-        console.log("response body error");
-    }
-}
 
 app.listen(app.get('port'), function(){
     console.log("Running on Port: " + app.get('port'));
