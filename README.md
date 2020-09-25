@@ -1,6 +1,12 @@
 # MCMFusionVotationBot
 
 # Changelog
+indev 0.2.9 (09/25/2020)
+- Code improvements
+- Added xlsx
+- Major Code Restructure
+- Make Database file downloadable
+
 indev 0.2.8-a (09/24/2020)
 - Code improvements
 
