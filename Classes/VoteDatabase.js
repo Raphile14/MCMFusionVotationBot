@@ -127,7 +127,7 @@ module.exports = class VoteDatabase {
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             this.Voters[selectedCategory][sender] = [sender, payload, date];
             for (var people in this.Voters[selectedCategory]) {
-                format = format.concat(this.Voters[selectedCategory][people]);
+                format = format.concat([this.Voters[selectedCategory][people]]);
             }
             // TODO: Add counter here
             // TODO: Save to database here
