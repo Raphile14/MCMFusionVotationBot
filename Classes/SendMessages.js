@@ -24,14 +24,13 @@ module.exports = class SendMessages {
                 message: messageData
             }
         }, function (error, response, body) {
-            errorMessage(error, response, body);
-            // if (error) {
-            //     console.log("sending error");
-            // }
-            // else if (response.body.error) {
-            //     console.log(response.body.error);
-            //     console.log("response body error");
-            // }
+            if (error) {
+                console.log("sending error");
+            }
+            else if (response.body.error) {
+                console.log(response.body.error);
+                console.log("response body error");
+            }
         });
     }
 
@@ -69,15 +68,14 @@ module.exports = class SendMessages {
                     }
                 }
             }
-        }, function (error, response, body) {
-            errorMessage(error, response, body);
-            // if (error) {
-            //     console.log("sending error");
-            // }
-            // else if (response.body.error) {
-            //     console.log(response.body.error);
-            //     console.log("response body error");
-            // }
+        }, function (error, response, body) {            
+            if (error) {
+                console.log("sending error");
+            }
+            else if (response.body.error) {
+                console.log(response.body.error);
+                console.log("response body error");
+            }
         });
     }
 
@@ -116,25 +114,13 @@ module.exports = class SendMessages {
                 }
             }
         }, function (error, response, body) {
-            errorMessage(error, response, body);
-            // if (error) {
-            //     console.log("sending error");
-            // }
-            // else if (response.body.error) {
-            //     console.log(response.body.error);
-            //     console.log("response body error");
-            // }
+            if (error) {
+                console.log("sending error");
+            }
+            else if (response.body.error) {
+                console.log(response.body.error);
+                console.log("response body error");
+            }
         }); 
-    }
-
-    // For error Messages
-    errorMessage (error, response, body) {
-        if (error) {
-            console.log("sending error");
-        }
-        else if (response.body.error) {
-            console.log(response.body.error);
-            console.log("response body error");
-        }
-    }
+    }    
 }
