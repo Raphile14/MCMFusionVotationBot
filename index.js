@@ -162,7 +162,7 @@ function sendText(sender, text) {
             recipient: {id: sender},
             message: messageData
         }
-    }, SendMessages.errorMessage(error, response, body));
+    }, errorMessage(error, response, body));
 }
 
 // For Specialized Buttons
@@ -200,7 +200,7 @@ function sendButton(sender, data) {
                 }
             }
         }
-    }, SendMessages.errorMessage(error, response, body));
+    }, errorMessage(error, response, body));
 }
 
 // For Main Button
@@ -238,7 +238,17 @@ function sendQueryButton(sender) {
                 }
             }
         }
-    }, SendMessages.errorMessage(error, response, body)); 
+    }, errorMessage(error, response, body)); 
+}
+
+function errorMessage (error, response, body) {
+    if (error) {
+        console.log("sending error");
+    }
+    else if (response.body.error) {
+        console.log(response.body.error);
+        console.log("response body error");
+    }
 }
 
 app.listen(app.get('port'), function(){

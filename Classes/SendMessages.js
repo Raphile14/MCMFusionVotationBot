@@ -110,6 +110,5 @@ module.exports = class SendMessages {
             console.log(response.body.error);
             console.log("response body error");
         }
-        console.log("test");
     }
 }
