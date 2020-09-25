@@ -3,16 +3,11 @@ const fs = require('fs');
 const Config = require('./Config.json');
 
 module.exports = class VoteDatabase {
-    constructor(Voters, categories, cacheConfigJSON, cacheVotingPayloads /*, cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries*/) {
+    constructor(Voters, categories, cacheConfigJSON, cacheVotingPayloads) {
         this.Voters = Voters;
         this.categories = categories;
         this.cacheConfigJSON = cacheConfigJSON;
         this.cacheVotingPayloads = cacheVotingPayloads;
-        // this.cacheAllEntries = cacheAllEntries;
-        // this.cacheSSSHSEntries = cacheSSSHSEntries;
-        // this.cacheSSCEntries = cacheSSCEntries;
-        // this.cacheFACSHSEntries = cacheFACSHSEntries;
-        // this.cacheFACCEntries = cacheFACCEntries;
     }
     // Initialize Voting Logic
     init() {
@@ -28,22 +23,6 @@ module.exports = class VoteDatabase {
             if (this.cacheConfigJSON[key].b1_payload.includes("facSHSVote") || this.cacheConfigJSON[key].b1_payload.includes("facCVote") || this.cacheConfigJSON[key].b1_payload.includes("ssCVote") || this.cacheConfigJSON[key].b1_payload.includes("ssSHSVote")) {
                 this.cacheVotingPayloads.push(this.cacheConfigJSON[key].b1_payload);
             }
-            // if (key.includes("ssC")) {
-            //     this.cacheSSCEntries.push(key);
-            //     this.cacheAllEntries.push(key);
-            // }
-            // else if (key.includes("ssSHS")) {
-            //     this.cacheSSSHSEntries.push(key);
-            //     this.cacheAllEntries.push(key);
-            // }
-            // else if (key.includes("facC")) {
-            //     this.cacheFACCEntries.push(key);
-            //     this.cacheAllEntries.push(key);
-            // }
-            // else if (key.includes("facSHS")) {
-            //     this.cacheFACSHSEntries.push(key);
-            //     this.cacheAllEntries.push(key);
-            // }
         }
     }
     checkDatabase () {             

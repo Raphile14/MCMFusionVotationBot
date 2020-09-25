@@ -21,17 +21,10 @@ let cacheConfigJSON = []; // Contains data from participants
 let cacheVotingPayloads = []; // Contains Voting Payload Keywords
 let categories = ["ssSHS", "ssC", "facSHS", "facC"];
 
-// TODO: Use these entries to automate website generation
-// let cacheSSSHSEntries = []; // SHS Show Stopper Entries
-// let cacheSSCEntries = []; // College Show Stopper Entries
-// let cacheFACSHSEntries = []; // SHS Flicks and Chill Entries
-// let cacheFACCEntries = []; // College Flicks and Chill Entries
-// let cacheAllEntries = []; // All Entries
-
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let SendMessages = new sm(token);
-let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads, /*cacheAllEntries, cacheSSSHSEntries, cacheSSCEntries, cacheFACSHSEntries, cacheFACCEntries*/);
+let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads);
 
 // Initiating Commands
 VoteDatabase.init();
