@@ -2,7 +2,7 @@
 
 # Changelog
 indev 0.2.9-m (09/25/2020)
-- Ignore Data worksheet on github
+- Ignore Data worksheet on github (Did not work lel. Im such a noob)
 
 indev 0.2.9-l (09/25/2020)
 - Finalize Some Code Changes
