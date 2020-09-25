@@ -27,6 +27,7 @@ let categories = ["ssSHS", "ssC", "facSHS", "facC"];
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let SendMessages = new sm(token);
 let VoteDatabase = new VDatabase(Voters, categories, cacheConfigJSON, cacheVotingPayloads);
+let userCount = 0;
 
 // Initiating Commands
 VoteDatabase.init();
@@ -45,9 +46,15 @@ app.get('/', function(req, res){
 // Socket Connection
 io.on('connection', function(socket){
     console.log("A user has connected");
+    userCount++;
+
+    // Emit Player Count
+    io.emit("usersOnline", {number: userCount});
 
     socket.on('disconnect', function(){
         console.log("A user has disconnected");
+        userCount--;
+        io.emit("usersOnline", {number: userCount});
     })
 });
 
