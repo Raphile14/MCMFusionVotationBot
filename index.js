@@ -13,6 +13,10 @@ const sm = require('./Classes/SendMessages.js');
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 
+// Allows the process of data
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 // Cached Storage
 let Voters = [];
 let cacheConfigJSON = [];
@@ -22,7 +26,7 @@ let categories = ["shsShowStopper", "cShowStopper", "shsFlicksAndChill", "cFlick
 // Variables
 let token = process.env.PAGE_ACCESS_TOKEN || "test";
 let VoteDatabase = new VDatabase(categories);
-let SendMessages = new sm(token);
+let SendMessages = new sm(token, app);
 
 // TODO: Use these entries to automate website generation
 let cacheSSSHSEntries = [];
@@ -57,10 +61,6 @@ console.log(cacheSSSHSEntries);
 
 // Check or generate xlsx database
 VoteDatabase.checkDatabase();
-
-// Allows the process of data
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 
 // Client Use
 app.use(express.static(__dirname + '/client'));
