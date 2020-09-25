@@ -9,6 +9,8 @@ const sm = require('./Classes/SendMessages.js');
 
 // Initialization
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 app.set('port', (process.env.PORT || 5000));
 
 // Allows the process of data
@@ -37,7 +39,16 @@ app.use(express.static(__dirname + '/client'));
 
 // ROUTES
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname, 'client', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));    
+});
+
+// Socket Connection
+io.on('connection', function(socket){
+    console.log("A user has connected");
+
+    socket.on('disconnect', function(){
+        console.log("A user has disconnected");
+    })
 });
 
 // Facebook
@@ -113,6 +124,6 @@ app.post('/webhook/', function(req, res){
     res.sendStatus(200);
 });
 
-app.listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
     console.log("Running on Port: " + app.get('port'));
 })
