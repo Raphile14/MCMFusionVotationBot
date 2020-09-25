@@ -59,7 +59,7 @@ module.exports = class SendMessages {
                     }
                 }
             }
-        }, Utility.errorMessage(error, response, body));
+        }, this.errorMessage(error, response, body));
     }
 
     sendQueryButton(sender) {
@@ -96,7 +96,7 @@ module.exports = class SendMessages {
                     }
                 }
             }
-        }, Utility.errorMessage(error, response, body)); 
+        }, this.errorMessage(error, response, body)); 
     }
 
     // For error Messages
