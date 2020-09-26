@@ -6,6 +6,7 @@ socket.on("usersOnline", function(data){
 
 socket.on("test", function(data){
     console.log("Received a score update!")
+    console.log(data);
     console.log(data[0]);
     for (var key in data[0]) {
         document.getElementById(key).innerText =  data[0][key];
