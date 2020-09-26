@@ -6,11 +6,5 @@ socket.on("usersOnline", function(data){
 
 socket.on("test", function(data){
     console.log("Received a score update!")
-    console.log(data);
-    console.log(data.cacheVoteCount);
-    // console.log(data[0]);
-    for (var key in data.cacheVoteCount) {
-        document.getElementById(key).innerText =  data.cacheVoteCount[key];
-        console.log(key);
-    }
+    document.getElementById(data.name).innerText = data.score;
 })

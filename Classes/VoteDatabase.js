@@ -122,8 +122,8 @@ module.exports = class VoteDatabase {
             wb.Sheets[selectedCategory] = newData;            
             XLSX.writeFile(wb, "Data/MCMFusionTechnicityVotationLogs.xlsx");
             console.log("Database Updated by Vote");
-            return true;
+            return [true, payload];
         }
-        return false;
+        return [false];
     }
 }

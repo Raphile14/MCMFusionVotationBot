@@ -36,7 +36,7 @@ VoteDatabase.readParticipants(); // Read Config Participants
 VoteDatabase.checkDatabase(); // Check or generate xlsx database
 VoteDatabase.readDatabase(); // Read Database if data is already present
 // console.log(cacheConfigJSON);
-console.log(cacheVoteCount);
+// console.log(cacheVoteCount);
 
 // Client Use
 app.use(express.static(__dirname + '/client'));
@@ -52,6 +52,17 @@ io.on('connection', function(socket){
 
     // Emit Player Count
     io.emit("usersOnline", {number: userCount});
+    // Test
+    // io.emit("test", {name: status[1], score: cacheVoteCount.status[1]});
+    // io.emit("test", {name: "facSHSVoteSTEM", score: cacheVoteCount.facSHSVoteSTEM});
+    // io.emit("test", {name: "facSHSVoteSTEM", score: 1});
+    // io.emit("test", {count: cacheVoteCount});
+    // console.log(JSON.stringify(cacheVoteCount));
+    // console.log(cacheVoteCount.length);
+    // console.log("num: " + cacheVoteCount.facSHSVoteSTEM);
+    // for (var x in cacheVoteCount) {
+    //     console.log(x);
+    // }
 
     socket.on('disconnect', function(){
         userCount--;
@@ -94,10 +105,10 @@ app.post('/webhook/', function(req, res){
             // If Payload is a Vote            
             else if (cacheVotingPayloads.includes(payload)) {
                 let status = VoteDatabase.submitVote(sender, payload);
-                if (status) {
+                if (status[0]) {
                     SendMessages.sendText(sender, "Vote Success");
-                    io.emit("test", {cacheVoteCount});
-                    console.log(cacheVoteCount);
+                    io.emit("test", {name: status[1], score: cacheVoteCount.status[1]});
+                    console.log(status);
                 } 
                 else SendMessages.sendText(sender, "Vote Fail");          
             }
