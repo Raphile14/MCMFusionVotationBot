@@ -52,19 +52,6 @@ io.on('connection', function(socket){
 
     // Emit Player Count
     io.emit("usersOnline", {number: userCount});
-    // Test
-    // io.emit("test", {name: status[1], score: cacheVoteCount.status[1]});
-    // io.emit("test", {name: "facSHSVoteSTEM", score: cacheVoteCount.facSHSVoteSTEM});
-    // io.emit("test", {name: "facSHSVoteSTEM", score: 1});
-    // io.emit("test", {count: cacheVoteCount});
-    // console.log(JSON.stringify(cacheVoteCount));
-    // console.log(cacheVoteCount.length);
-    // console.log("num: " + cacheVoteCount.facSHSVoteSTEM);
-    // for (var x in cacheVoteCount) {
-    //     console.log(x);
-    // }
-    // let status = [true, 'facSHSVoteABM'];
-    // console.log("num: " + cacheVoteCount[status[1]]);
 
     socket.on('disconnect', function(){
         userCount--;
