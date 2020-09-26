@@ -97,6 +97,7 @@ app.post('/webhook/', function(req, res){
                 if (status) {
                     SendMessages.sendText(sender, "Vote Success");
                     io.emit("test", cacheVoteCount);
+                    console.log(cacheVoteCount);
                 } 
                 else SendMessages.sendText(sender, "Vote Fail");          
             }

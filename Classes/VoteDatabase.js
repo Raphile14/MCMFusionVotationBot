@@ -107,7 +107,6 @@ module.exports = class VoteDatabase {
             selectedCategory = this.categories[3];
         } 
         storageVoteCount[payload]++;
-        console.log(storageVoteCount);
         
         if (!this.Voters[selectedCategory][sender]) {
             let format = [["id", "team", "date"]];
