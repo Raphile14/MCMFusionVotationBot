@@ -105,10 +105,10 @@ app.post('/webhook/', function(req, res){
             // If Payload is a Vote            
             else if (cacheVotingPayloads.includes(payload)) {
                 let status = VoteDatabase.submitVote(sender, payload);
+                console.log(status);
                 if (status[0]) {
                     SendMessages.sendText(sender, "Vote Success");
-                    io.emit("test", {name: status[1], score: cacheVoteCount.status[1]});
-                    console.log(status);
+                    io.emit("test", {name: status[1], score: cacheVoteCount.status[1]});                    
                 } 
                 else SendMessages.sendText(sender, "Vote Fail");          
             }
