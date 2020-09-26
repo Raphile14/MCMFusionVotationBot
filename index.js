@@ -53,6 +53,10 @@ io.on('connection', function(socket){
     // Emit Player Count
     io.emit("usersOnline", {number: userCount});
 
+    for (var key in cacheVoteCount) {
+        socket.emit("current", {name: key, score: cacheVoteCount[key]});
+    }
+
     socket.on('disconnect', function(){
         userCount--;
         io.emit("usersOnline", {number: userCount});
@@ -97,7 +101,7 @@ app.post('/webhook/', function(req, res){
                 console.log(status);
                 if (status[0]) {
                     SendMessages.sendText(sender, "Vote Success");
-                    io.emit("test", {name: status[1], score: cacheVoteCount[status[1]]});                    
+                    io.emit("current", {name: status[1], score: cacheVoteCount[status[1]]});                    
                 } 
                 else SendMessages.sendText(sender, "Vote Fail");          
             }
