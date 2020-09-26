@@ -63,6 +63,8 @@ io.on('connection', function(socket){
     // for (var x in cacheVoteCount) {
     //     console.log(x);
     // }
+    // let status = [true, 'facSHSVoteABM'];
+    // console.log("num: " + cacheVoteCount[status[1]]);
 
     socket.on('disconnect', function(){
         userCount--;
@@ -108,7 +110,7 @@ app.post('/webhook/', function(req, res){
                 console.log(status);
                 if (status[0]) {
                     SendMessages.sendText(sender, "Vote Success");
-                    io.emit("test", {name: status[1], score: cacheVoteCount.status[1]});                    
+                    io.emit("test", {name: status[1], score: cacheVoteCount[status[1]]});                    
                 } 
                 else SendMessages.sendText(sender, "Vote Fail");          
             }
