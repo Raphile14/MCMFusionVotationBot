@@ -4,6 +4,9 @@
 This Bot is used to assist the MCM Fusion: Technicity event for the academic year 2020-2021 on October 2, 2020. The Bot will handle the votation process for the Show Stopper and MCMFlicks and Chill through messenger. A website is provided to show a live display of current votes (https://mcmfusionvotationbot.herokuapp.com/).
 
 # Changelog
+indev 0.3.3-e (09/26/2020)
+- Debugging
+
 indev 0.3.3-d (09/26/2020)
 - Debugging
 
